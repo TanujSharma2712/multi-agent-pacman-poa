@@ -1,73 +1,354 @@
 {
-  "k_values": [
-    2,
-    3,
-    4
+  "layout": "proposal_maze",
+  "ghosts": 2,
+  "eval_episodes": 20,
+  "train_seeds": [
+    0,
+    1,
+    2
   ],
-  "beta_values": [
-    0.0,
-    0.3,
-    0.6,
-    0.9
+  "train_episodes": 40,
+  "part_a_k_beta": [
+    {
+      "k": 2,
+      "beta": 0.0,
+      "pellet_density": 1.0,
+      "j_opt": 772.7343,
+      "j_opt_ci": 17.4855,
+      "j_selfish": 377.4921,
+      "j_selfish_ci": 24.8392,
+      "j_selfish_seed_ci": 39.5431,
+      "j_selfish_seed_means": [
+        397.7153,
+        397.6189,
+        337.142
+      ],
+      "poa": 2.047
+    },
+    {
+      "k": 2,
+      "beta": 0.3,
+      "pellet_density": 1.0,
+      "j_opt": 738.4787,
+      "j_opt_ci": 24.7431,
+      "j_selfish": 386.8074,
+      "j_selfish_ci": 80.005,
+      "j_selfish_seed_ci": 421.8481,
+      "j_selfish_seed_means": [
+        759.6848,
+        14.1111,
+        386.6263
+      ],
+      "poa": 1.9092
+    },
+    {
+      "k": 2,
+      "beta": 0.6,
+      "pellet_density": 1.0,
+      "j_opt": 707.0447,
+      "j_opt_ci": 30.4477,
+      "j_selfish": 702.8438,
+      "j_selfish_ci": 18.6262,
+      "j_selfish_seed_ci": 13.9125,
+      "j_selfish_seed_means": [
+        696.6492,
+        717.0034,
+        694.8789
+      ],
+      "poa": 1.006
+    },
+    {
+      "k": 2,
+      "beta": 0.9,
+      "pellet_density": 1.0,
+      "j_opt": 702.0059,
+      "j_opt_ci": 24.0405,
+      "j_selfish": 525.2121,
+      "j_selfish_ci": 89.6153,
+      "j_selfish_seed_ci": 196.376,
+      "j_selfish_seed_means": [
+        373.603,
+        714.4901,
+        487.5432
+      ],
+      "poa": 1.3366
+    },
+    {
+      "k": 3,
+      "beta": 0.0,
+      "pellet_density": 1.0,
+      "j_opt": 960.5163,
+      "j_opt_ci": 10.3005,
+      "j_selfish": 592.9972,
+      "j_selfish_ci": 44.0102,
+      "j_selfish_seed_ci": 223.0518,
+      "j_selfish_seed_means": [
+        701.6678,
+        365.4693,
+        711.8544
+      ],
+      "poa": 1.6198
+    },
+    {
+      "k": 3,
+      "beta": 0.3,
+      "pellet_density": 1.0,
+      "j_opt": 909.9173,
+      "j_opt_ci": 16.6303,
+      "j_selfish": 583.8388,
+      "j_selfish_ci": 41.3806,
+      "j_selfish_seed_ci": 189.4078,
+      "j_selfish_seed_means": [
+        670.4677,
+        690.1488,
+        390.8999
+      ],
+      "poa": 1.5585
+    },
+    {
+      "k": 3,
+      "beta": 0.6,
+      "pellet_density": 1.0,
+      "j_opt": 865.8984,
+      "j_opt_ci": 17.8211,
+      "j_selfish": 598.1469,
+      "j_selfish_ci": 52.627,
+      "j_selfish_seed_ci": 155.335,
+      "j_selfish_seed_means": [
+        462.1935,
+        595.5517,
+        736.6956
+      ],
+      "poa": 1.4476
+    },
+    {
+      "k": 3,
+      "beta": 0.9,
+      "pellet_density": 1.0,
+      "j_opt": 854.4406,
+      "j_opt_ci": 25.0936,
+      "j_selfish": 622.4128,
+      "j_selfish_ci": 78.6095,
+      "j_selfish_seed_ci": 238.6883,
+      "j_selfish_seed_means": [
+        381.1853,
+        713.9073,
+        772.1457
+      ],
+      "poa": 1.3728
+    },
+    {
+      "k": 4,
+      "beta": 0.0,
+      "pellet_density": 1.0,
+      "j_opt": 968.0922,
+      "j_opt_ci": 17.8439,
+      "j_selfish": 612.7403,
+      "j_selfish_ci": 19.9578,
+      "j_selfish_seed_ci": 57.9583,
+      "j_selfish_seed_means": [
+        603.334,
+        668.0093,
+        566.8777
+      ],
+      "poa": 1.5799
+    },
+    {
+      "k": 4,
+      "beta": 0.3,
+      "pellet_density": 1.0,
+      "j_opt": 974.699,
+      "j_opt_ci": 15.5315,
+      "j_selfish": 678.8292,
+      "j_selfish_ci": 26.9517,
+      "j_selfish_seed_ci": 107.9763,
+      "j_selfish_seed_means": [
+        629.0318,
+        618.6111,
+        788.8448
+      ],
+      "poa": 1.4359
+    },
+    {
+      "k": 4,
+      "beta": 0.6,
+      "pellet_density": 1.0,
+      "j_opt": 923.0218,
+      "j_opt_ci": 16.5215,
+      "j_selfish": 688.8818,
+      "j_selfish_ci": 52.3912,
+      "j_selfish_seed_ci": 93.8963,
+      "j_selfish_seed_means": [
+        635.9062,
+        784.5088,
+        646.2305
+      ],
+      "poa": 1.3399
+    },
+    {
+      "k": 4,
+      "beta": 0.9,
+      "pellet_density": 1.0,
+      "j_opt": 918.6871,
+      "j_opt_ci": 18.3041,
+      "j_selfish": 694.17,
+      "j_selfish_ci": 52.5142,
+      "j_selfish_seed_ci": 105.2837,
+      "j_selfish_seed_means": [
+        732.7209,
+        588.0518,
+        761.7373
+      ],
+      "poa": 1.3234
+    }
   ],
-  "optimal_returns": {
-    "2": [
-      772.73,
-      738.48,
-      707.04,
-      702.01
-    ],
-    "3": [
-      960.52,
-      909.92,
-      865.9,
-      854.44
-    ],
-    "4": [
-      968.09,
-      974.7,
-      923.02,
-      918.69
-    ]
-  },
-  "selfish_returns": {
-    "2": [
-      776.53,
-      399.39,
-      742.55,
-      684.15
-    ],
-    "3": [
-      638.1,
-      413.39,
-      549.09,
-      677.76
-    ],
-    "4": [
-      827.64,
-      607.89,
-      734.88,
-      293.64
-    ]
-  },
-  "poa_matrix": {
-    "2": [
-      1.0,
-      1.849,
-      1.0,
-      1.026
-    ],
-    "3": [
-      1.505,
-      2.201,
-      1.577,
-      1.261
-    ],
-    "4": [
-      1.17,
-      1.603,
-      1.256,
-      3.129
+  "part_b_scarcity": {
+    "beta": 0.5,
+    "cells": [
+      {
+        "k": 2,
+        "beta": 0.5,
+        "pellet_density": 1.0,
+        "j_opt": 711.2544,
+        "j_opt_ci": 29.868,
+        "j_selfish": 738.1145,
+        "j_selfish_ci": 16.1502,
+        "j_selfish_seed_ci": 4.9907,
+        "j_selfish_seed_means": [
+          742.1617,
+          738.7678,
+          733.4139
+        ],
+        "poa": 1.0
+      },
+      {
+        "k": 2,
+        "beta": 0.5,
+        "pellet_density": 0.5,
+        "j_opt": 331.781,
+        "j_opt_ci": 21.8916,
+        "j_selfish": 335.8103,
+        "j_selfish_ci": 11.7919,
+        "j_selfish_seed_ci": 9.3299,
+        "j_selfish_seed_means": [
+          329.3689,
+          345.1021,
+          332.9599
+        ],
+        "poa": 1.0
+      },
+      {
+        "k": 2,
+        "beta": 0.5,
+        "pellet_density": 0.25,
+        "j_opt": 127.3486,
+        "j_opt_ci": 15.3922,
+        "j_selfish": 89.01,
+        "j_selfish_ci": 11.6933,
+        "j_selfish_seed_ci": 34.1041,
+        "j_selfish_seed_means": [
+          59.0482,
+          119.3208,
+          88.6611
+        ],
+        "poa": 1.4307
+      },
+      {
+        "k": 3,
+        "beta": 0.5,
+        "pellet_density": 1.0,
+        "j_opt": 902.5757,
+        "j_opt_ci": 25.5339,
+        "j_selfish": 569.8623,
+        "j_selfish_ci": 28.8548,
+        "j_selfish_seed_ci": 89.5735,
+        "j_selfish_seed_means": [
+          515.836,
+          533.0275,
+          660.7233
+        ],
+        "poa": 1.5838
+      },
+      {
+        "k": 3,
+        "beta": 0.5,
+        "pellet_density": 0.5,
+        "j_opt": 410.8674,
+        "j_opt_ci": 15.5369,
+        "j_selfish": 219.0098,
+        "j_selfish_ci": 15.4775,
+        "j_selfish_seed_ci": 55.8184,
+        "j_selfish_seed_means": [
+          192.5882,
+          188.5223,
+          275.9189
+        ],
+        "poa": 1.876
+      },
+      {
+        "k": 3,
+        "beta": 0.5,
+        "pellet_density": 0.25,
+        "j_opt": 167.9562,
+        "j_opt_ci": 9.9531,
+        "j_selfish": 49.6789,
+        "j_selfish_ci": 23.6205,
+        "j_selfish_seed_ci": 104.9601,
+        "j_selfish_seed_means": [
+          -9.7114,
+          2.1876,
+          156.5606
+        ],
+        "poa": 3.3808
+      },
+      {
+        "k": 4,
+        "beta": 0.5,
+        "pellet_density": 1.0,
+        "j_opt": 945.924,
+        "j_opt_ci": 18.207,
+        "j_selfish": 642.5654,
+        "j_selfish_ci": 29.232,
+        "j_selfish_seed_ci": 97.4377,
+        "j_selfish_seed_means": [
+          738.5025,
+          617.2073,
+          571.9864
+        ],
+        "poa": 1.4721
+      },
+      {
+        "k": 4,
+        "beta": 0.5,
+        "pellet_density": 0.5,
+        "j_opt": 440.5799,
+        "j_opt_ci": 12.4897,
+        "j_selfish": 237.6874,
+        "j_selfish_ci": 47.9507,
+        "j_selfish_seed_ci": 219.9035,
+        "j_selfish_seed_means": [
+          22.0781,
+          291.6585,
+          399.3257
+        ],
+        "poa": 1.8536
+      },
+      {
+        "k": 4,
+        "beta": 0.5,
+        "pellet_density": 0.25,
+        "j_opt": 170.5488,
+        "j_opt_ci": 15.7598,
+        "j_selfish": 119.7763,
+        "j_selfish_ci": 10.7421,
+        "j_selfish_seed_ci": 11.2766,
+        "j_selfish_seed_means": [
+          131.2041,
+          115.2274,
+          112.8974
+        ],
+        "poa": 1.4239
+      }
     ]
   }
 }

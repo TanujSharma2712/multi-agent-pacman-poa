@@ -30,6 +30,19 @@ LAYOUTS = {
         "#####################"
     ],
 
+    # 5x5 Ring Toy Maze: tiny enough for EXACT analysis (proposal method M1).
+    # 8 open cells, 7 pellets, 2 Pac-Men, 1 ghost -> the full joint state space
+    # can be enumerated, so the team optimum pi* and best responses are solved exactly
+    # by dynamic programming (see src/exact_solver.py). The top-middle pellet is
+    # contested by both Pac-Men.
+    "toy_exact": [
+        "#####",
+        "#P.P#",
+        "#.#.#",
+        "#.G.#",
+        "#####"
+    ],
+
     # 6x6 Toy Maze: compact, great for exact analysis and equilibrium verification
     "toy": [
         "######",

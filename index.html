@@ -178,6 +178,55 @@
       height: auto;
     }
 
+    /* Game Over overlay (sits on top of the canvas) */
+    .canvas-wrap {
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+    }
+    .canvas-wrap canvas { display: block; }
+    #game-over {
+      position: absolute;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2, 6, 23, 0.82);
+      border-radius: 8px;
+      z-index: 5;
+    }
+    #game-over.show { display: flex; }
+    .go-card {
+      background: #0b1430;
+      border: 2px solid #facc15;
+      border-radius: 12px;
+      box-shadow: 0 0 30px rgba(250, 204, 21, 0.35);
+      padding: 16px 20px;
+      width: min(92%, 420px);
+      max-height: 94%;
+      overflow-y: auto;
+      text-align: center;
+      color: #e2e8f0;
+      font-family: inherit;
+    }
+    .go-title { font-size: 26px; font-weight: 800; letter-spacing: 2px; margin: 2px 0 4px; }
+    .go-title.win { color: #4ade80; text-shadow: 0 0 12px rgba(74, 222, 128, 0.6); }
+    .go-title.time { color: #facc15; text-shadow: 0 0 12px rgba(250, 204, 21, 0.6); }
+    .go-sub { font-size: 12.5px; color: #94a3b8; margin-bottom: 10px; }
+    .go-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .go-stat { background: #111c3d; border-radius: 6px; padding: 6px; font-size: 11px; color: #94a3b8; }
+    .go-stat b { display: block; font-size: 17px; color: #f8fafc; margin-top: 2px; }
+    .go-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 8px; }
+    .go-table th { color: #94a3b8; font-weight: 600; border-bottom: 1px solid #1e3a8a; padding: 4px; }
+    .go-table td { padding: 4px; border-bottom: 1px solid #13204a; }
+    .go-best { font-size: 12px; color: #facc15; margin-bottom: 10px; }
+    .go-buttons { display: flex; gap: 8px; justify-content: center; }
+    .go-buttons button {
+      padding: 7px 14px; border-radius: 6px; font-weight: 700; cursor: pointer;
+      border: 1px solid #38bdf8; background: #0284c7; color: #fff; font-size: 13px;
+    }
+    .go-buttons button.secondary { background: transparent; color: #cbd5e1; border-color: #475569; }
+
     /* On-Screen D-Pad Movement Controls */
     .controls-side {
       display: flex;
@@ -307,7 +356,7 @@
 
   <div class="header">
     <h1>MULTI-AGENT PAC-MAN: INTERACTIVE TESTBED</h1>
-    <p>IIT Gandhinagar | CS329 Multi-Agent Systems | Price of Anarchy (PoA) & Coordination Testbed</p>
+    <p>IIT Gandhinagar | CS 329: Foundations of AI: Multi-Agent Systems | Price of Anarchy (PoA) & Coordination Testbed</p>
   </div>
 
   <div class="main-container">
@@ -351,14 +400,39 @@
       <div class="stat-item">Pellets Left: <span id="lbl-pellets">149</span></div>
       <div class="stat-item captures">Ghost Captures: <span id="lbl-captures">0</span></div>
       <div class="stat-item step">Step: <span id="lbl-step">0</span></div>
-      <div class="stat-item poa">Live PoA: <span id="lbl-poa">1.000</span></div>
+      <div class="stat-item poa" title="Measured in the Python benchmark (see report), not computed from this browser game">Benchmark PoA: <span id="lbl-poa">1.000</span></div>
     </div>
 
     <!-- 4. Game Area: 75% Board (Left) vs 25% Control Station (Right) -->
     <div class="game-area">
       <!-- 75% Board Pane -->
       <div class="board-pane">
-        <canvas id="gameCanvas" width="735" height="525"></canvas>
+        <div class="canvas-wrap">
+          <canvas id="gameCanvas" width="735" height="525"></canvas>
+          <div id="game-over" role="dialog" aria-live="polite">
+            <div class="go-card">
+              <div id="go-title" class="go-title win">GAME OVER</div>
+              <div id="go-sub" class="go-sub"></div>
+              <div class="go-stats">
+                <div class="go-stat">Team score<b id="go-score">0</b></div>
+                <div class="go-stat">Pellets eaten<b id="go-pellets">0</b></div>
+                <div class="go-stat">Ghost captures<b id="go-captures">0</b></div>
+                <div class="go-stat">Steps used<b id="go-steps">0</b></div>
+                <div class="go-stat">Gini fairness<b id="go-gini">0</b></div>
+                <div class="go-stat">Algorithm<b id="go-algo" style="font-size:12px">-</b></div>
+              </div>
+              <table class="go-table">
+                <thead><tr><th>Pac-Man</th><th>Pellets</th><th>Captured</th><th>Return</th></tr></thead>
+                <tbody id="go-agents"></tbody>
+              </table>
+              <div id="go-best" class="go-best"></div>
+              <div class="go-buttons">
+                <button id="go-again">↺ Play Again</button>
+                <button id="go-close" class="secondary">View Board</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <!-- Legend -->
         <div class="legend-bar">
@@ -451,9 +525,15 @@
         <!-- Card 3: Metrics Summary -->
         <div class="sidebar-card">
           <h4 style="color:#ec4899">📊 ANALYTICAL METRICS</h4>
-          <div class="param-row"><span>Gini Fairness Index:</span><span id="lbl-gini" style="color:#38bdf8; font-weight:bold">0.000</span></div>
-          <div class="param-row"><span>Gap Recovered:</span><span id="lbl-gap" style="color:#a3e635; font-weight:bold">94.2%</span></div>
-          <div class="param-row"><span>Messages Sent:</span><span id="lbl-msgs" style="color:#facc15; font-weight:bold">24</span></div>
+          <div class="param-row"><span>Gini Fairness (live):</span><span id="lbl-gini" style="color:#38bdf8; font-weight:bold">0.000</span></div>
+          <div class="param-row"><span>Per-agent return (live):</span><span id="lbl-agent-returns" style="color:#e2e8f0; font-size:11px">-</span></div>
+          <div class="param-row"><span>Gap Recovered (benchmark):</span><span id="lbl-gap" style="color:#a3e635; font-weight:bold">-</span></div>
+          <div class="param-row"><span>Max-Sum msgs / step:</span><span id="lbl-msgs" style="color:#facc15; font-weight:bold">0</span></div>
+          <div id="lbl-metric-source" style="font-size:10px; color:#94a3b8; margin-top:6px; line-height:1.35">
+            Gini and per-agent returns are computed live from this game. PoA and gap are
+            measured values from the Python benchmark (see report); the browser AI is a
+            simplified imitation of each algorithm.
+          </div>
         </div>
 
       </div>
@@ -494,12 +574,23 @@
     let openCells = [];
 
     // Starting positions
-    let pacmanStarts = [[2, 13], [10, 9], [16, 3]];
-    let ghostStarts = [[10, 5], [10, 7]];
+    // Up to 5 Pac-Men and 3 ghosts (Team Size k and Ghosts settings)
+    let pacmanStarts = [[2, 13], [10, 9], [16, 3], [18, 13], [2, 1]];
+    let ghostStarts = [[10, 5], [10, 7], [9, 7]];
+    const PACMAN_COLORS = ["#00e5ff", "#ffd600", "#ff4081", "#4ade80", "#c084fc"];
+    const GHOST_COLORS = ["#ef4444", "#f97316", "#a855f7"];
+    let numPacmen = 3;
+    let numGhosts = 2;
     let pacmen = [];
     let ghosts = [];
 
     let score = 0;
+    let agentReturns = [];  // live per-Pac-Man return (same reward rules as the Python simulator)
+    let agentPellets = [];  // pellets eaten by each Pac-Man
+    let agentCaught = [];   // times each Pac-Man was caught
+    let initialPellets = 0;
+    let gameOver = false;
+    const MAX_STEPS = 100;
     let captures = 0;
     let stepCount = 0;
     let isPlaying = false;
@@ -607,16 +698,35 @@
         }
       }
 
-      pacmen = [
-        { x: pacmanStarts[0][0], y: pacmanStarts[0][1], dir: [1, 0], color: "#00e5ff", label: "P1" },
-        { x: pacmanStarts[1][0], y: pacmanStarts[1][1], dir: [1, 0], color: "#ffd600", label: "P2" },
-        { x: pacmanStarts[2][0], y: pacmanStarts[2][1], dir: [-1, 0], color: "#ff4081", label: "P3" }
-      ];
+      // Team size and ghost count come from the Experimental Controls panel
+      const kSel = document.getElementById("sel-k");
+      const gSel = document.getElementById("sel-ghosts");
+      numPacmen = Math.min(5, Math.max(1, parseInt(kSel && kSel.value) || 3));
+      numGhosts = Math.min(3, Math.max(0, isNaN(parseInt(gSel && gSel.value)) ? 2 : parseInt(gSel.value)));
 
-      ghosts = [
-        { x: ghostStarts[0][0], y: ghostStarts[0][1], color: "#ef4444", label: "G1" },
-        { x: ghostStarts[1][0], y: ghostStarts[1][1], color: "#f97316", label: "G2" }
-      ];
+      pacmen = [];
+      for (let i = 0; i < numPacmen; i++) {
+        pacmen.push({ x: pacmanStarts[i][0], y: pacmanStarts[i][1], dir: [i === 2 ? -1 : 1, 0],
+                      color: PACMAN_COLORS[i], label: `P${i + 1}` });
+      }
+      ghosts = [];
+      for (let j = 0; j < numGhosts; j++) {
+        ghosts.push({ x: ghostStarts[j][0], y: ghostStarts[j][1], color: GHOST_COLORS[j], label: `G${j + 1}` });
+      }
+      updateTeamLabels();
+    }
+
+    function updateTeamLabels() {
+      const lbl = document.getElementById("lbl-select");
+      if (lbl) {
+        const mates = numPacmen <= 1 ? "none" : (numPacmen === 2 ? "P2" : `P2 to P${numPacmen}`);
+        lbl.innerText = isHumanMode ? `AI Teammates (${mates}):` : "Team Algorithm (All AI):";
+      }
+      const desc = document.getElementById("panel-desc");
+      if (desc && !isHumanMode) {
+        const g = numGhosts === 0 ? "no ghosts" : (numGhosts === 1 ? "1 ghost" : `${numGhosts} ghosts`);
+        desc.innerHTML = `AI controlling all ${numPacmen} Pac-Men<br>with ${g}!`;
+      }
     }
 
     function dist(x1, y1, x2, y2) {
@@ -650,7 +760,8 @@
       else if (dx === 1 && dy === 0) document.getElementById("btn-right").classList.add("active");
       else if (dx === 0 && dy === 0) document.getElementById("btn-stay").classList.add("active");
 
-      if (!isPlaying) {
+      // While paused, each move key advances one step, but never past game over
+      if (!isPlaying && !gameOver) {
         step();
       }
     }
@@ -663,6 +774,12 @@
 
       parseLayout();
       score = 0;
+      agentReturns = pacmen.map(() => 0);
+      agentPellets = pacmen.map(() => 0);
+      agentCaught = pacmen.map(() => 0);
+      initialPellets = pellets.size;
+      gameOver = false;
+      hideGameOver();
       captures = 0;
       stepCount = 0;
       currentDir = [1, 0];
@@ -680,14 +797,75 @@
       document.getElementById("lbl-captures").innerText = captures;
       document.getElementById("lbl-step").innerText = stepCount;
 
-      const benchmark = 911.0;
-      const poa = score > 0 ? Math.max(1.0, benchmark / score) : 1.0;
-      document.getElementById("lbl-poa").innerText = poa.toFixed(3);
+      updateMetrics();
+    }
+
+    // Gini coefficient, identical to src/metrics.py: shift negatives to >= 0,
+    // then sum_i sum_j |x_i - x_j| / (2 k sum x).
+    function computeGini(values) {
+      const k = values.length;
+      if (k <= 1) return 0;
+      const minV = Math.min(...values);
+      const arr = minV < 0 ? values.map(v => v - minV) : values.slice();
+      const total = arr.reduce((a, b) => a + b, 0);
+      if (total === 0) return 0;
+      let diff = 0;
+      for (const a of arr) for (const b of arr) diff += Math.abs(a - b);
+      return diff / (2 * k * total);
+    }
+
+    // Measured results from the Python benchmark (results/*.json, report Tables).
+    // Main condition: proposal maze, k=3, 2 ghosts, beta=0.5.
+    const BENCH = {
+      dcop:    { gap: 62.8, poa: 1.101, name: "DCOP Max-Sum (B=24), Exp 4" },
+      shapley: { gap: 34.4, poa: 1.193, name: "Shapley Q (lambda=0.5), Exp 4" },
+      selfish: { gap: 92.6, poa: 1.019, name: "Independent Greedy, Exp 4" },
+      opt:     { gap: 100.0, poa: 1.000, name: "Centralized planner, Exp 4" },
+      random:  { gap: null, poa: null, name: "Random, Exp 4 (negative return)" },
+    };
+    // Exp 2, Max-Sum with m=3 regions: team return per budget; J(pi*)=905.1, J(selfish Q)=693.6
+    const EXP2_MAXSUM = { 0: 735.3, 6: 735.3, 12: 805.6, 24: 826.2, 36: 799.2 };
+    const EXP2_OPT = 905.1, EXP2_SELFISH = 693.6;
+
+    function updateMetrics() {
+      // live values from this game
+      document.getElementById("lbl-gini").innerText = computeGini(agentReturns).toFixed(3);
+      document.getElementById("lbl-agent-returns").innerText =
+        agentReturns.map((r, i) => `P${i + 1}: ${r.toFixed(0)}`).join("  ");
+
+      // measured values from the Python benchmark
+      const algo = document.getElementById("algo-select").value;
+      const budget = parseInt(document.getElementById("sel-budget").value);
+      let gap, poa, src;
+      if (numPacmen !== 3 || numGhosts !== 2) {
+        // the benchmark was measured only for k = 3 Pac-Men and 2 ghosts
+        gap = null; poa = null;
+        src = "no benchmark for this setting (measured for k=3, 2 ghosts only)";
+      } else if (algo === "dcop" && EXP2_MAXSUM[budget] !== undefined) {
+        const j = EXP2_MAXSUM[budget];
+        gap = 100 * (j - EXP2_SELFISH) / (EXP2_OPT - EXP2_SELFISH);
+        poa = EXP2_OPT / j;
+        src = `DCOP Max-Sum, B=${budget}, m=3 (Exp 2)`;
+      } else {
+        const b = BENCH[algo] || BENCH.random;
+        gap = b.gap; poa = b.poa; src = b.name;
+      }
+      document.getElementById("lbl-gap").innerText = gap === null ? "n/a" : `${gap.toFixed(1)}%`;
+      document.getElementById("lbl-poa").innerText = poa === null ? "n/a" : poa.toFixed(3);
+      document.getElementById("lbl-gap").title = `Measured in the Python benchmark: ${src}`;
+      document.getElementById("lbl-poa").title = document.getElementById("lbl-gap").title;
+
+      // Max-Sum sends whole iterations of 2k(k-1) = 12 messages for k=3
+      const msgs = algo === "dcop" ? Math.floor(budget / 12) * 12 : 0;
+      document.getElementById("lbl-msgs").innerText = msgs;
     }
 
     function step() {
       stepCount++;
       const algo = document.getElementById("algo-select").value;
+
+      // Remember positions so each Pac-Man can face the way it actually moved
+      const prevPos = pacmen.map(p => [p.x, p.y]);
 
       // 1. Move Pac-Man 1 (Human if in Human Mode; AI if in Autonomous Mode)
       const p1 = pacmen[0];
@@ -697,8 +875,7 @@
 
         if (!walls.has(`${moveX},${moveY}`)) {
           p1.x = moveX;
-          p1.y = moveY;
-          p1.dir = queuedDir;
+          p1.y = moveY;  // facing is set below from the actual movement
         } else {
           let contX = p1.x + currentDir[0];
           let contY = p1.y + currentDir[1];
@@ -712,10 +889,16 @@
         moveAIAgent(0, algo);
       }
 
-      // 2. Move Teammates P2 & P3 (AI)
+      // 2. Move Teammates P2..Pk (AI)
       for (let i = 1; i < pacmen.length; i++) {
         moveAIAgent(i, algo);
       }
+
+      // Face the direction of actual movement; keep the old facing when standing still
+      pacmen.forEach((p, i) => {
+        const dx = p.x - prevPos[i][0], dy = p.y - prevPos[i][1];
+        if (dx !== 0 || dy !== 0) p.dir = [Math.sign(dx), Math.sign(dy)];
+      });
 
       // 3. Move Ghosts
       for (const g of ghosts) {
@@ -758,6 +941,8 @@
           if (p.x === g.x && p.y === g.y) {
             captures++;
             score -= 50;
+            agentReturns[i] -= 50;
+            agentCaught[i] += 1;
             p.x = pacmanStarts[i][0];
             p.y = pacmanStarts[i][1];
           }
@@ -765,21 +950,34 @@
       }
 
       // 5. Pellet Harvest
-      for (const p of pacmen) {
+      // Every pellet is worth +10 (same as the Python simulator). If several
+      // Pac-Men land on one pellet, one random winner gets it.
+      const contenders = {};
+      pacmen.forEach((p, i) => {
         const key = `${p.x},${p.y}`;
-        if (pellets.has(key)) {
-          pellets.delete(key);
-          score += powerPellets.has(key) ? 20 : 10;
-        }
+        if (pellets.has(key)) (contenders[key] = contenders[key] || []).push(i);
+      });
+      for (const key in contenders) {
+        const who = contenders[key];
+        const winner = who[Math.floor(Math.random() * who.length)];
+        pellets.delete(key);
+        score += 10;
+        agentReturns[winner] += 10;
+        agentPellets[winner] += 1;
       }
       score -= pacmen.length * 1.0;
+      for (let i = 0; i < agentReturns.length; i++) agentReturns[i] -= 1.0;
 
       updateHUD();
       draw();
 
-      if (pellets.size === 0 || stepCount >= 100) {
+      if (pellets.size === 0 || stepCount >= MAX_STEPS) {
         isPlaying = false;
+        gameOver = true;
+        clearTimeout(timerId);
         document.getElementById("btn-play").innerText = "↺ RESTART";
+        document.getElementById("btn-play").classList.add("primary");
+        showGameOver(pellets.size === 0);
         return;
       }
 
@@ -787,6 +985,49 @@
         const delay = 380 - parseInt(document.getElementById("speed-range").value);
         timerId = setTimeout(step, Math.max(50, delay));
       }
+    }
+
+    function showGameOver(cleared) {
+      const title = document.getElementById("go-title");
+      title.textContent = cleared ? "🏆 MAZE CLEARED!" : "⏱ TIME UP!";
+      title.className = "go-title " + (cleared ? "win" : "time");
+      const eaten = initialPellets - pellets.size;
+      document.getElementById("go-sub").textContent = cleared
+        ? `All ${initialPellets} pellets eaten in ${stepCount} steps.`
+        : `Step limit of ${MAX_STEPS} reached with ${pellets.size} pellets left.`;
+      document.getElementById("go-score").textContent = score.toFixed(0);
+      document.getElementById("go-pellets").textContent = `${eaten} / ${initialPellets}`;
+      document.getElementById("go-captures").textContent = captures;
+      document.getElementById("go-steps").textContent = stepCount;
+      document.getElementById("go-gini").textContent = computeGini(agentReturns).toFixed(3);
+      const sel = document.getElementById("algo-select");
+      document.getElementById("go-algo").textContent = sel.options[sel.selectedIndex]
+        ? sel.options[sel.selectedIndex].text.split("(")[0].trim() : sel.value;
+
+      const rows = pacmen.map((p, i) => {
+        const name = (isHumanMode && i === 0) ? `P1 (YOU)` : `P${i + 1}`;
+        return `<tr><td style="color:${p.color}; font-weight:700">${name}</td>` +
+               `<td>${agentPellets[i]}</td><td>${agentCaught[i]}</td><td>${agentReturns[i].toFixed(0)}</td></tr>`;
+      });
+      document.getElementById("go-agents").innerHTML = rows.join("");
+
+      const best = Math.max(...agentPellets);
+      const leaders = agentPellets.map((v, i) => (v === best ? i : -1)).filter(i => i >= 0);
+      let msg;
+      if (best === 0) msg = "Nobody ate a pellet this round.";
+      else if (leaders.length > 1) msg = `Tie for top harvester: ${leaders.map(i => "P" + (i + 1)).join(", ")} (${best} pellets each)`;
+      else {
+        const i = leaders[0];
+        const who = (isHumanMode && i === 0) ? "YOU (P1)" : `P${i + 1}`;
+        msg = `Top harvester: ${who} with ${best} pellets`;
+      }
+      document.getElementById("go-best").textContent = msg;
+      document.getElementById("game-over").classList.add("show");
+    }
+
+    function hideGameOver() {
+      const el = document.getElementById("game-over");
+      if (el) el.classList.remove("show");
     }
 
     function moveAIAgent(idx, algo) {
@@ -802,7 +1043,8 @@
         return;
       }
 
-      let targetRegion = idx; // 0=A (x<7), 1=B (7<=x<=13), 2=C (x>13)
+      // 0=A (x<7), 1=B (7<=x<=13), 2=C (x>13); with k > 3 agents share regions (m = 3)
+      let targetRegion = idx % 3;
       let bestMove = null;
       let bestDist = Infinity;
 
@@ -1005,6 +1247,7 @@
 
     // Toolbar Buttons
     document.getElementById("btn-play").addEventListener("click", () => {
+      if (gameOver) resetGame();  // "↺ RESTART" really restarts now
       isPlaying = !isPlaying;
       if (isPlaying) {
         document.getElementById("btn-play").innerText = "⏸ PAUSE";
@@ -1018,8 +1261,17 @@
     });
 
     document.getElementById("btn-step").addEventListener("click", () => {
-      if (!isPlaying) step();
+      if (!isPlaying && !gameOver) step();
     });
+
+    document.getElementById("go-again").addEventListener("click", () => {
+      resetGame();
+      isPlaying = true;
+      document.getElementById("btn-play").innerText = "⏸ PAUSE";
+      document.getElementById("btn-play").classList.remove("primary");
+      step();
+    });
+    document.getElementById("go-close").addEventListener("click", hideGameOver);
 
     document.getElementById("btn-reset").addEventListener("click", resetGame);
     document.getElementById("algo-select").addEventListener("change", resetGame);
@@ -1030,9 +1282,6 @@
       const budget = document.getElementById("sel-budget").value;
       const lmb = document.getElementById("sel-lambda").value;
 
-      document.getElementById("lbl-msgs").innerText = budget;
-      document.getElementById("lbl-gap").innerText = (budget >= 24) ? "94.2%" : (budget >= 12 ? "85.6%" : "42.1%");
-      document.getElementById("lbl-gini").innerText = (lmb == 0.0) ? "0.684" : ((1.0 - lmb) * 0.45).toFixed(3);
 
       resetGame();
     });

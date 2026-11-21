@@ -1,43 +1,284 @@
 {
-  "lambdas": [
-    0.0,
-    0.25,
-    0.5,
-    0.75,
-    1.0
+  "layout": "proposal_maze",
+  "k": 3,
+  "ghosts": 2,
+  "eval_episodes": 20,
+  "train_seeds": [
+    0,
+    1,
+    2
   ],
-  "team_returns": [
-    465.38,
-    830.93,
-    745.44,
-    238.71,
-    795.87
-  ],
-  "team_returns_ci": [
-    39.91,
-    74.39,
-    28.96,
-    39.01,
-    42.21
-  ],
-  "gini_indices": [
-    0.512,
-    0.115,
-    0.3,
-    0.452,
-    0.138
-  ],
-  "gini_indices_ci": [
-    0.026,
-    0.039,
-    0.028,
-    0.031,
-    0.035
-  ],
-  "equal_share": {
-    "team_return": 589.25,
-    "team_return_ci": 166.31,
-    "gini": 0.374,
-    "gini_ci": 0.011
-  }
+  "train_episodes": 40,
+  "per_beta": [
+    {
+      "beta": 0.0,
+      "lambdas": [
+        {
+          "lambda": 0.0,
+          "team_return": 695.7077,
+          "team_return_ci": 18.1769,
+          "team_return_seed_ci": 23.8168,
+          "seed_means": [
+            708.4853,
+            671.4157,
+            707.2221
+          ],
+          "gini": 0.3669,
+          "gini_ci": 0.0075,
+          "captures": 0.3333
+        },
+        {
+          "lambda": 0.25,
+          "team_return": 692.3984,
+          "team_return_ci": 19.0417,
+          "team_return_seed_ci": 21.0964,
+          "seed_means": [
+            706.437,
+            671.246,
+            699.5121
+          ],
+          "gini": 0.3731,
+          "gini_ci": 0.0094,
+          "captures": 0.25
+        },
+        {
+          "lambda": 0.5,
+          "team_return": 537.0934,
+          "team_return_ci": 43.7195,
+          "team_return_seed_ci": 209.6347,
+          "seed_means": [
+            614.3695,
+            325.7117,
+            671.199
+          ],
+          "gini": 0.4749,
+          "gini_ci": 0.0345,
+          "captures": 0.3333
+        },
+        {
+          "lambda": 0.75,
+          "team_return": 772.619,
+          "team_return_ci": 26.252,
+          "team_return_seed_ci": 114.187,
+          "seed_means": [
+            722.2347,
+            706.826,
+            888.7962
+          ],
+          "gini": 0.2696,
+          "gini_ci": 0.0331,
+          "captures": 0.5167
+        },
+        {
+          "lambda": 1.0,
+          "team_return": 712.9127,
+          "team_return_ci": 14.7322,
+          "team_return_seed_ci": 11.9725,
+          "seed_means": [
+            703.2234,
+            724.2014,
+            711.3133
+          ],
+          "gini": 0.3655,
+          "gini_ci": 0.0065,
+          "captures": 0.25
+        }
+      ],
+      "equal_share": {
+        "team_return": 300.8133,
+        "team_return_ci": 92.5239,
+        "team_return_seed_ci": 494.4528,
+        "gini": 0.4175
+      },
+      "gain_over_selfish": {
+        "0.25": -3.3093,
+        "0.5": -158.6143,
+        "0.75": 76.9113,
+        "1.0": 17.205
+      },
+      "best_lambda": 0.75,
+      "best_gain": 76.9113,
+      "best_gain_pct": 11.0551
+    },
+    {
+      "beta": 0.5,
+      "lambdas": [
+        {
+          "lambda": 0.0,
+          "team_return": 663.7946,
+          "team_return_ci": 23.7024,
+          "team_return_seed_ci": 30.6456,
+          "seed_means": [
+            657.8279,
+            693.3618,
+            640.1939
+          ],
+          "gini": 0.3617,
+          "gini_ci": 0.0099,
+          "captures": 2.9167
+        },
+        {
+          "lambda": 0.25,
+          "team_return": 712.9175,
+          "team_return_ci": 38.7703,
+          "team_return_seed_ci": 190.7001,
+          "seed_means": [
+            530.9836,
+            744.0968,
+            863.672
+          ],
+          "gini": 0.2869,
+          "gini_ci": 0.0396,
+          "captures": 1.9667
+        },
+        {
+          "lambda": 0.5,
+          "team_return": 540.4826,
+          "team_return_ci": 88.0906,
+          "team_return_seed_ci": 421.1799,
+          "seed_means": [
+            870.9302,
+            613.2368,
+            137.281
+          ],
+          "gini": 0.309,
+          "gini_ci": 0.043,
+          "captures": 2.6333
+        },
+        {
+          "lambda": 0.75,
+          "team_return": 591.7455,
+          "team_return_ci": 41.9005,
+          "team_return_seed_ci": 155.4597,
+          "seed_means": [
+            644.3951,
+            435.8284,
+            695.0131
+          ],
+          "gini": 0.4034,
+          "gini_ci": 0.0221,
+          "captures": 2.9667
+        },
+        {
+          "lambda": 1.0,
+          "team_return": 674.8221,
+          "team_return_ci": 33.5004,
+          "team_return_seed_ci": 35.6069,
+          "seed_means": [
+            676.7389,
+            642.4418,
+            705.2857
+          ],
+          "gini": 0.3441,
+          "gini_ci": 0.019,
+          "captures": 3.5167
+        }
+      ],
+      "equal_share": {
+        "team_return": 454.3258,
+        "team_return_ci": 71.4859,
+        "team_return_seed_ci": 336.5792,
+        "gini": 0.3599
+      },
+      "gain_over_selfish": {
+        "0.25": 49.1229,
+        "0.5": -123.3119,
+        "0.75": -72.049,
+        "1.0": 11.0276
+      },
+      "best_lambda": 0.25,
+      "best_gain": 49.1229,
+      "best_gain_pct": 7.4003
+    },
+    {
+      "beta": 0.9,
+      "lambdas": [
+        {
+          "lambda": 0.0,
+          "team_return": 624.5912,
+          "team_return_ci": 33.7212,
+          "team_return_seed_ci": 104.3613,
+          "seed_means": [
+            730.2312,
+            560.135,
+            583.4073
+          ],
+          "gini": 0.3801,
+          "gini_ci": 0.0241,
+          "captures": 3.15
+        },
+        {
+          "lambda": 0.25,
+          "team_return": 518.5271,
+          "team_return_ci": 86.0739,
+          "team_return_seed_ci": 111.511,
+          "seed_means": [
+            606.3242,
+            411.9443,
+            537.3128
+          ],
+          "gini": 0.4044,
+          "gini_ci": 0.0294,
+          "captures": 4.6167
+        },
+        {
+          "lambda": 0.5,
+          "team_return": 618.4905,
+          "team_return_ci": 76.9045,
+          "team_return_seed_ci": 208.5947,
+          "seed_means": [
+            764.9761,
+            678.9857,
+            411.5096
+          ],
+          "gini": 0.3447,
+          "gini_ci": 0.0358,
+          "captures": 3.8667
+        },
+        {
+          "lambda": 0.75,
+          "team_return": 732.1085,
+          "team_return_ci": 36.7447,
+          "team_return_seed_ci": 113.5756,
+          "seed_means": [
+            622.2686,
+            819.042,
+            755.015
+          ],
+          "gini": 0.2518,
+          "gini_ci": 0.033,
+          "captures": 3.7
+        },
+        {
+          "lambda": 1.0,
+          "team_return": 636.7394,
+          "team_return_ci": 83.1259,
+          "team_return_seed_ci": 306.7087,
+          "seed_means": [
+            670.9154,
+            350.234,
+            889.0688
+          ],
+          "gini": 0.3167,
+          "gini_ci": 0.0501,
+          "captures": 3.5667
+        }
+      ],
+      "equal_share": {
+        "team_return": 210.3766,
+        "team_return_ci": 50.982,
+        "team_return_seed_ci": 127.8129,
+        "gini": 0.4954
+      },
+      "gain_over_selfish": {
+        "0.25": -106.0641,
+        "0.5": -6.1007,
+        "0.75": 107.5174,
+        "1.0": 12.1482
+      },
+      "best_lambda": 0.75,
+      "best_gain": 107.5174,
+      "best_gain_pct": 17.214
+    }
+  ]
 }

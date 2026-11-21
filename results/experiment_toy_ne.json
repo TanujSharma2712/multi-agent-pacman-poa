@@ -1,0 +1,436 @@
+{
+  "layout": "toy_exact",
+  "k": 2,
+  "ghosts": 1,
+  "horizon": 12,
+  "train_seeds": [
+    0,
+    1,
+    2
+  ],
+  "results": [
+    {
+      "layout": "toy_exact",
+      "k": 2,
+      "ghosts": 1,
+      "beta": 0.0,
+      "horizon": 12,
+      "num_states": 37550,
+      "j_opt": 51.4759,
+      "opt_agent_returns": [
+        25.7092,
+        25.7667
+      ],
+      "opt_nash_gap": 6.9671,
+      "num_starts": 5,
+      "num_converged": 5,
+      "equilibria": [
+        {
+          "start": "team_optimum",
+          "converged": true,
+          "cycle": false,
+          "iterations": 3,
+          "agent_returns": [
+            21.4798,
+            21.5986
+          ],
+          "team_return": 43.0783,
+          "nash_gap": 0.0
+        },
+        {
+          "start": "greedy",
+          "converged": true,
+          "cycle": false,
+          "iterations": 3,
+          "agent_returns": [
+            20.9158,
+            21.669
+          ],
+          "team_return": 42.5848,
+          "nash_gap": 0.0
+        },
+        {
+          "start": "random_0",
+          "converged": true,
+          "cycle": false,
+          "iterations": 3,
+          "agent_returns": [
+            21.6098,
+            20.9615
+          ],
+          "team_return": 42.5713,
+          "nash_gap": 0.0
+        },
+        {
+          "start": "random_1",
+          "converged": true,
+          "cycle": false,
+          "iterations": 3,
+          "agent_returns": [
+            22.2443,
+            21.0002
+          ],
+          "team_return": 43.2445,
+          "nash_gap": 0.0
+        },
+        {
+          "start": "random_2",
+          "converged": true,
+          "cycle": false,
+          "iterations": 4,
+          "agent_returns": [
+            21.4651,
+            22.2751
+          ],
+          "team_return": 43.7402,
+          "nash_gap": 0.0
+        }
+      ],
+      "j_worst_ne": 42.5713,
+      "j_best_ne": 43.7402,
+      "distinct_ne_values": [
+        42.5713,
+        42.5848,
+        43.0783,
+        43.2445,
+        43.7402
+      ],
+      "poa": 1.2092,
+      "pos": 1.1769,
+      "equilibrium_type": "exact pure NE (Nash gap 0)",
+      "mc_check_opt": 51.3469,
+      "heuristic_planner": {
+        "policy_type": "centralized",
+        "team_return_mean": 40.8712,
+        "team_return_ci": 1.3121,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 10.81,
+        "steps_ci": 0.2597,
+        "gini_mean": 0.1707,
+        "gini_ci": 0.0171,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0
+      },
+      "greedy": {
+        "policy_type": "greedy",
+        "team_return_mean": 38.9983,
+        "team_return_ci": 1.4709,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 10.825,
+        "steps_ci": 0.266,
+        "gini_mean": 0.2413,
+        "gini_ci": 0.0209,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0
+      },
+      "q_selfish": {
+        "policy_type": "q_learning:selfish",
+        "team_return_mean": 39.8843,
+        "team_return_ci": 1.5885,
+        "captures_mean": 0.0202,
+        "captures_ci": 0.0196,
+        "steps_mean": 10.8586,
+        "steps_ci": 0.2553,
+        "gini_mean": 0.1726,
+        "gini_ci": 0.0172,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0,
+        "team_return_seed_ci": 3.3285,
+        "seed_means": [
+          40.0479,
+          36.8645,
+          42.7404
+        ],
+        "seed_ginis": [
+          0.1475,
+          0.1876,
+          0.1825
+        ],
+        "num_train_seeds": 3
+      },
+      "heuristic_vs_exact_opt_pct": 79.3987,
+      "poa_q_proxy": 1.2906,
+      "seconds": 24.2697
+    },
+    {
+      "layout": "toy_exact",
+      "k": 2,
+      "ghosts": 1,
+      "beta": 0.5,
+      "horizon": 12,
+      "num_states": 37550,
+      "j_opt": 57.5597,
+      "opt_agent_returns": [
+        31.5844,
+        25.9753
+      ],
+      "opt_nash_gap": 16.0245,
+      "num_starts": 5,
+      "num_converged": 0,
+      "equilibria": [
+        {
+          "start": "team_optimum",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            19.1181,
+            20.4256
+          ],
+          "team_return": 39.5438,
+          "nash_gap": 1.4224
+        },
+        {
+          "start": "greedy",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            19.5715,
+            19.3329
+          ],
+          "team_return": 38.9044,
+          "nash_gap": 2.0566
+        },
+        {
+          "start": "random_0",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            18.43,
+            20.2049
+          ],
+          "team_return": 38.6349,
+          "nash_gap": 2.3145
+        },
+        {
+          "start": "random_1",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            18.5683,
+            20.2535
+          ],
+          "team_return": 38.8219,
+          "nash_gap": 2.247
+        },
+        {
+          "start": "random_2",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            18.331,
+            20.3706
+          ],
+          "team_return": 38.7016,
+          "nash_gap": 2.2943
+        }
+      ],
+      "equilibrium_type": "no pure NE found by IBR (best-response cycle); reporting epsilon-NE with epsilon=1.4224",
+      "eps": 1.4224,
+      "j_worst_ne": 39.5438,
+      "j_best_ne": 39.5438,
+      "poa": 1.4556,
+      "pos": 1.4556,
+      "mc_check_opt": 57.7009,
+      "heuristic_planner": {
+        "policy_type": "centralized",
+        "team_return_mean": 43.5231,
+        "team_return_ci": 1.3116,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 10.19,
+        "steps_ci": 0.2763,
+        "gini_mean": 0.2099,
+        "gini_ci": 0.018,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0
+      },
+      "greedy": {
+        "policy_type": "greedy",
+        "team_return_mean": 42.0393,
+        "team_return_ci": 1.4696,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 10.325,
+        "steps_ci": 0.3028,
+        "gini_mean": 0.2617,
+        "gini_ci": 0.0215,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0
+      },
+      "q_selfish": {
+        "policy_type": "q_learning:selfish",
+        "team_return_mean": 43.6375,
+        "team_return_ci": 1.5053,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 9.8737,
+        "steps_ci": 0.3062,
+        "gini_mean": 0.271,
+        "gini_ci": 0.0224,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0,
+        "team_return_seed_ci": 1.3434,
+        "seed_means": [
+          43.0818,
+          45.0006,
+          42.8301
+        ],
+        "seed_ginis": [
+          0.3043,
+          0.2584,
+          0.2504
+        ],
+        "num_train_seeds": 3
+      },
+      "heuristic_vs_exact_opt_pct": 75.6138,
+      "poa_q_proxy": 1.319,
+      "seconds": 99.8587
+    },
+    {
+      "layout": "toy_exact",
+      "k": 2,
+      "ghosts": 1,
+      "beta": 0.9,
+      "horizon": 12,
+      "num_states": 37550,
+      "j_opt": 60.5875,
+      "opt_agent_returns": [
+        34.8411,
+        25.7463
+      ],
+      "opt_nash_gap": 17.4846,
+      "num_starts": 5,
+      "num_converged": 0,
+      "equilibria": [
+        {
+          "start": "team_optimum",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            23.3447,
+            17.8985
+          ],
+          "team_return": 41.2431,
+          "nash_gap": 0.331
+        },
+        {
+          "start": "greedy",
+          "converged": false,
+          "cycle": true,
+          "iterations": 12,
+          "agent_returns": [
+            20.6517,
+            18.7047
+          ],
+          "team_return": 39.3564,
+          "nash_gap": 0.3447
+        },
+        {
+          "start": "random_0",
+          "converged": false,
+          "cycle": true,
+          "iterations": 11,
+          "agent_returns": [
+            20.6675,
+            20.5367
+          ],
+          "team_return": 41.2043,
+          "nash_gap": 0.4099
+        },
+        {
+          "start": "random_1",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            24.3326,
+            17.7862
+          ],
+          "team_return": 42.1188,
+          "nash_gap": 0.6881
+        },
+        {
+          "start": "random_2",
+          "converged": false,
+          "cycle": false,
+          "iterations": 12,
+          "agent_returns": [
+            24.0742,
+            17.9766
+          ],
+          "team_return": 42.0508,
+          "nash_gap": 0.5919
+        }
+      ],
+      "equilibrium_type": "no pure NE found by IBR (best-response cycle); reporting epsilon-NE with epsilon=0.3310",
+      "eps": 0.331,
+      "j_worst_ne": 41.2431,
+      "j_best_ne": 41.2431,
+      "poa": 1.469,
+      "pos": 1.469,
+      "mc_check_opt": 60.5855,
+      "heuristic_planner": {
+        "policy_type": "centralized",
+        "team_return_mean": 50.7865,
+        "team_return_ci": 0.7356,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 8.47,
+        "steps_ci": 0.1879,
+        "gini_mean": 0.186,
+        "gini_ci": 0.0166,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0
+      },
+      "greedy": {
+        "policy_type": "greedy",
+        "team_return_mean": 50.3004,
+        "team_return_ci": 0.936,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 8.595,
+        "steps_ci": 0.2727,
+        "gini_mean": 0.2891,
+        "gini_ci": 0.0209,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0
+      },
+      "q_selfish": {
+        "policy_type": "q_learning:selfish",
+        "team_return_mean": 50.6805,
+        "team_return_ci": 1.0928,
+        "captures_mean": 0.0,
+        "captures_ci": 0.0,
+        "steps_mean": 8.2273,
+        "steps_ci": 0.2661,
+        "gini_mean": 0.2497,
+        "gini_ci": 0.0167,
+        "msgs_per_step_mean": 0.0,
+        "msgs_per_step_ci": 0.0,
+        "team_return_seed_ci": 5.5476,
+        "seed_means": [
+          55.8949,
+          46.1652,
+          49.9815
+        ],
+        "seed_ginis": [
+          0.2415,
+          0.2416,
+          0.266
+        ],
+        "num_train_seeds": 3
+      },
+      "heuristic_vs_exact_opt_pct": 83.8235,
+      "poa_q_proxy": 1.1955,
+      "seconds": 102.3664
+    }
+  ]
+}

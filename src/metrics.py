@@ -57,13 +57,15 @@ def compute_gap_recovered(
     """
     Fraction of selfish gap recovered:
     Recov = (J(remedy) - J(selfish)) / (J(opt) - J(selfish))
-    Clamped between 0 and 1 (or slightly > 1 if heuristic exceeds baseline).
+    0 = no better than selfish, 1 = matches the optimum. NOT clamped: a negative
+    value means the remedy did worse than selfish play, > 1 means it beat the
+    reference optimum. Returns NaN when there is no gap to recover
+    (J(opt) <= J(selfish)), because the ratio is then meaningless.
     """
     denom = optimal_return - selfish_return
-    if abs(denom) < 1e-6:
-        return 1.0 if remedy_return >= selfish_return else 0.0
-    recov = (remedy_return - selfish_return) / denom
-    return float(max(0.0, recov))
+    if denom <= 1e-6:
+        return float("nan")
+    return float((remedy_return - selfish_return) / denom)
 
 
 def compute_ci95(data: List[float]) -> Tuple[float, float, float]:

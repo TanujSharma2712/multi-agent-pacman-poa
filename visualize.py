@@ -78,7 +78,6 @@ def draw_pacman(ax, x, y, color="#00e5ff", label="P1", mouth_angle=45, facing=0,
 
 def generate_maze_visualization(layout_name: str = "proposal_maze", num_pacman: int = 3, num_ghosts: int = 2):
     os.makedirs("plots", exist_ok=True)
-    os.makedirs("media", exist_ok=True)
 
     env = MultiAgentPacmanEnv(layout_name=layout_name, num_pacman=num_pacman, num_ghosts=num_ghosts, seed=42)
     partition = RegionPartition(env, num_regions=num_pacman)
@@ -194,11 +193,9 @@ def generate_maze_visualization(layout_name: str = "proposal_maze", num_pacman: 
     plt.subplots_adjust(top=0.88, bottom=0.12)
 
     out_plot = "plots/fig_maze_simulation.png"
-    out_media = "media/fig_maze.png"
     plt.savefig(out_plot, bbox_inches="tight", dpi=300, facecolor="#000000")
-    plt.savefig(out_media, bbox_inches="tight", dpi=300, facecolor="#000000")
     plt.close()
-    print(f"Publication-grade retro maze saved to {out_plot} and {out_media}")
+    print(f"Maze figure saved to {out_plot}")
 
 
 if __name__ == "__main__":

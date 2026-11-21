@@ -11,3 +11,17 @@ ENV/
 *.swp
 *.swo
 .DS_Store
+
+# The LaTeX report is kept outside this repository (Overleaf)
+*.tex
+*.sty
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.pdf
+overleaf_upload*/
+overleaf_upload*.zip
+
+# Figures live only in plots/
+media/

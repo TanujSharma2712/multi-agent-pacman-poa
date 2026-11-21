@@ -1,44 +1,426 @@
 {
+  "layout": "proposal_maze",
+  "k": 3,
+  "ghosts": 2,
+  "beta": 0.5,
+  "eval_episodes": 20,
+  "train_seeds": [
+    0,
+    1,
+    2
+  ],
+  "j_opt": 905.1237,
+  "j_selfish": 693.5883,
+  "j_selfish_seed_ci": 67.1643,
   "budgets": [
     0,
-    2,
     6,
     12,
-    20,
-    30
+    24,
+    36,
+    48
   ],
-  "j_opt": 905.12,
-  "j_selfish": 754.16,
-  "dsa_returns": [
-    774.07,
-    778.59,
-    726.2,
-    751.81,
-    722.05,
-    755.04
+  "region_counts": [
+    2,
+    3,
+    4
   ],
-  "dsa_recovered": [
-    13.2,
-    16.2,
-    0.0,
-    0.0,
-    0.0,
-    0.6
-  ],
-  "max_sum_returns": [
-    745.21,
-    765.92,
-    777.65,
-    772.72,
-    805.39,
-    827.03
-  ],
-  "max_sum_recovered": [
-    0.0,
-    7.8,
-    15.6,
-    12.3,
-    33.9,
-    48.3
+  "cells": [
+    {
+      "m": 2,
+      "algo": "dsa",
+      "budget": 0,
+      "team_return": 785.8335,
+      "team_return_ci": 35.1652,
+      "recovered_pct": 43.6074,
+      "msgs_per_step": 0.0,
+      "gini": 0.1116,
+      "captures": 1.0
+    },
+    {
+      "m": 2,
+      "algo": "dsa",
+      "budget": 6,
+      "team_return": 751.2781,
+      "team_return_ci": 37.2278,
+      "recovered_pct": 27.2719,
+      "msgs_per_step": 6.0,
+      "gini": 0.1275,
+      "captures": 0.6
+    },
+    {
+      "m": 2,
+      "algo": "dsa",
+      "budget": 12,
+      "team_return": 763.8791,
+      "team_return_ci": 28.5692,
+      "recovered_pct": 33.2289,
+      "msgs_per_step": 12.0,
+      "gini": 0.1066,
+      "captures": 1.1
+    },
+    {
+      "m": 2,
+      "algo": "dsa",
+      "budget": 24,
+      "team_return": 777.742,
+      "team_return_ci": 28.0827,
+      "recovered_pct": 39.7823,
+      "msgs_per_step": 24.0,
+      "gini": 0.0982,
+      "captures": 0.8
+    },
+    {
+      "m": 2,
+      "algo": "dsa",
+      "budget": 36,
+      "team_return": 786.4795,
+      "team_return_ci": 23.3261,
+      "recovered_pct": 43.9129,
+      "msgs_per_step": 36.0,
+      "gini": 0.0987,
+      "captures": 0.95
+    },
+    {
+      "m": 2,
+      "algo": "dsa",
+      "budget": 48,
+      "team_return": 781.0282,
+      "team_return_ci": 22.9265,
+      "recovered_pct": 41.3358,
+      "msgs_per_step": 48.0,
+      "gini": 0.0886,
+      "captures": 0.85
+    },
+    {
+      "m": 2,
+      "algo": "max_sum",
+      "budget": 0,
+      "team_return": 785.8335,
+      "team_return_ci": 35.1652,
+      "recovered_pct": 43.6074,
+      "msgs_per_step": 0.0,
+      "gini": 0.1116,
+      "captures": 1.0
+    },
+    {
+      "m": 2,
+      "algo": "max_sum",
+      "budget": 6,
+      "team_return": 785.8335,
+      "team_return_ci": 35.1652,
+      "recovered_pct": 43.6074,
+      "msgs_per_step": 0.0,
+      "gini": 0.1116,
+      "captures": 1.0
+    },
+    {
+      "m": 2,
+      "algo": "max_sum",
+      "budget": 12,
+      "team_return": 808.9357,
+      "team_return_ci": 30.0475,
+      "recovered_pct": 54.5287,
+      "msgs_per_step": 12.0,
+      "gini": 0.1055,
+      "captures": 0.65
+    },
+    {
+      "m": 2,
+      "algo": "max_sum",
+      "budget": 24,
+      "team_return": 830.1821,
+      "team_return_ci": 24.9765,
+      "recovered_pct": 64.5725,
+      "msgs_per_step": 24.0,
+      "gini": 0.0775,
+      "captures": 0.75
+    },
+    {
+      "m": 2,
+      "algo": "max_sum",
+      "budget": 36,
+      "team_return": 671.7515,
+      "team_return_ci": 29.6701,
+      "recovered_pct": -10.323,
+      "msgs_per_step": 36.0,
+      "gini": 0.0817,
+      "captures": 0.8
+    },
+    {
+      "m": 2,
+      "algo": "max_sum",
+      "budget": 48,
+      "team_return": 648.2216,
+      "team_return_ci": 45.1418,
+      "recovered_pct": -21.4464,
+      "msgs_per_step": 48.0,
+      "gini": 0.1146,
+      "captures": 0.9
+    },
+    {
+      "m": 3,
+      "algo": "dsa",
+      "budget": 0,
+      "team_return": 735.3083,
+      "team_return_ci": 34.0207,
+      "recovered_pct": 19.7224,
+      "msgs_per_step": 0.0,
+      "gini": 0.1258,
+      "captures": 0.7
+    },
+    {
+      "m": 3,
+      "algo": "dsa",
+      "budget": 6,
+      "team_return": 751.8885,
+      "team_return_ci": 29.4186,
+      "recovered_pct": 27.5605,
+      "msgs_per_step": 6.0,
+      "gini": 0.0986,
+      "captures": 0.7
+    },
+    {
+      "m": 3,
+      "algo": "dsa",
+      "budget": 12,
+      "team_return": 743.6809,
+      "team_return_ci": 24.2402,
+      "recovered_pct": 23.6805,
+      "msgs_per_step": 12.0,
+      "gini": 0.0997,
+      "captures": 0.45
+    },
+    {
+      "m": 3,
+      "algo": "dsa",
+      "budget": 24,
+      "team_return": 756.8854,
+      "team_return_ci": 35.0079,
+      "recovered_pct": 29.9227,
+      "msgs_per_step": 24.0,
+      "gini": 0.0985,
+      "captures": 0.75
+    },
+    {
+      "m": 3,
+      "algo": "dsa",
+      "budget": 36,
+      "team_return": 759.8554,
+      "team_return_ci": 38.9177,
+      "recovered_pct": 31.3267,
+      "msgs_per_step": 36.0,
+      "gini": 0.0912,
+      "captures": 0.85
+    },
+    {
+      "m": 3,
+      "algo": "dsa",
+      "budget": 48,
+      "team_return": 744.4672,
+      "team_return_ci": 40.1194,
+      "recovered_pct": 24.0522,
+      "msgs_per_step": 48.0,
+      "gini": 0.1076,
+      "captures": 0.65
+    },
+    {
+      "m": 3,
+      "algo": "max_sum",
+      "budget": 0,
+      "team_return": 735.3083,
+      "team_return_ci": 34.0207,
+      "recovered_pct": 19.7224,
+      "msgs_per_step": 0.0,
+      "gini": 0.1258,
+      "captures": 0.7
+    },
+    {
+      "m": 3,
+      "algo": "max_sum",
+      "budget": 6,
+      "team_return": 735.3083,
+      "team_return_ci": 34.0207,
+      "recovered_pct": 19.7224,
+      "msgs_per_step": 0.0,
+      "gini": 0.1258,
+      "captures": 0.7
+    },
+    {
+      "m": 3,
+      "algo": "max_sum",
+      "budget": 12,
+      "team_return": 805.5751,
+      "team_return_ci": 24.6111,
+      "recovered_pct": 52.94,
+      "msgs_per_step": 12.0,
+      "gini": 0.0921,
+      "captures": 0.65
+    },
+    {
+      "m": 3,
+      "algo": "max_sum",
+      "budget": 24,
+      "team_return": 826.2332,
+      "team_return_ci": 30.9019,
+      "recovered_pct": 62.7058,
+      "msgs_per_step": 24.0,
+      "gini": 0.0875,
+      "captures": 1.05
+    },
+    {
+      "m": 3,
+      "algo": "max_sum",
+      "budget": 36,
+      "team_return": 799.1747,
+      "team_return_ci": 24.1944,
+      "recovered_pct": 49.9143,
+      "msgs_per_step": 36.0,
+      "gini": 0.0755,
+      "captures": 0.95
+    },
+    {
+      "m": 3,
+      "algo": "max_sum",
+      "budget": 48,
+      "team_return": 776.7496,
+      "team_return_ci": 39.6306,
+      "recovered_pct": 39.3132,
+      "msgs_per_step": 48.0,
+      "gini": 0.0833,
+      "captures": 1.4
+    },
+    {
+      "m": 4,
+      "algo": "dsa",
+      "budget": 0,
+      "team_return": 799.3249,
+      "team_return_ci": 37.026,
+      "recovered_pct": 49.9853,
+      "msgs_per_step": 0.0,
+      "gini": 0.1088,
+      "captures": 0.6
+    },
+    {
+      "m": 4,
+      "algo": "dsa",
+      "budget": 6,
+      "team_return": 742.7972,
+      "team_return_ci": 23.9989,
+      "recovered_pct": 23.2627,
+      "msgs_per_step": 6.0,
+      "gini": 0.0938,
+      "captures": 0.65
+    },
+    {
+      "m": 4,
+      "algo": "dsa",
+      "budget": 12,
+      "team_return": 762.4044,
+      "team_return_ci": 35.1848,
+      "recovered_pct": 32.5317,
+      "msgs_per_step": 12.0,
+      "gini": 0.0987,
+      "captures": 0.65
+    },
+    {
+      "m": 4,
+      "algo": "dsa",
+      "budget": 24,
+      "team_return": 772.0366,
+      "team_return_ci": 31.0374,
+      "recovered_pct": 37.0852,
+      "msgs_per_step": 24.0,
+      "gini": 0.0707,
+      "captures": 0.5
+    },
+    {
+      "m": 4,
+      "algo": "dsa",
+      "budget": 36,
+      "team_return": 769.9879,
+      "team_return_ci": 26.4122,
+      "recovered_pct": 36.1167,
+      "msgs_per_step": 36.0,
+      "gini": 0.0982,
+      "captures": 1.0
+    },
+    {
+      "m": 4,
+      "algo": "dsa",
+      "budget": 48,
+      "team_return": 776.0049,
+      "team_return_ci": 23.9955,
+      "recovered_pct": 38.9612,
+      "msgs_per_step": 48.0,
+      "gini": 0.1,
+      "captures": 0.7
+    },
+    {
+      "m": 4,
+      "algo": "max_sum",
+      "budget": 0,
+      "team_return": 799.3249,
+      "team_return_ci": 37.026,
+      "recovered_pct": 49.9853,
+      "msgs_per_step": 0.0,
+      "gini": 0.1088,
+      "captures": 0.6
+    },
+    {
+      "m": 4,
+      "algo": "max_sum",
+      "budget": 6,
+      "team_return": 799.3249,
+      "team_return_ci": 37.026,
+      "recovered_pct": 49.9853,
+      "msgs_per_step": 0.0,
+      "gini": 0.1088,
+      "captures": 0.6
+    },
+    {
+      "m": 4,
+      "algo": "max_sum",
+      "budget": 12,
+      "team_return": 841.7594,
+      "team_return_ci": 23.0329,
+      "recovered_pct": 70.0455,
+      "msgs_per_step": 12.0,
+      "gini": 0.1044,
+      "captures": 0.45
+    },
+    {
+      "m": 4,
+      "algo": "max_sum",
+      "budget": 24,
+      "team_return": 855.5697,
+      "team_return_ci": 16.6157,
+      "recovered_pct": 76.5742,
+      "msgs_per_step": 24.0,
+      "gini": 0.0909,
+      "captures": 0.9
+    },
+    {
+      "m": 4,
+      "algo": "max_sum",
+      "budget": 36,
+      "team_return": 852.5545,
+      "team_return_ci": 29.0222,
+      "recovered_pct": 75.1487,
+      "msgs_per_step": 36.0,
+      "gini": 0.0816,
+      "captures": 0.6
+    },
+    {
+      "m": 4,
+      "algo": "max_sum",
+      "budget": 48,
+      "team_return": 819.5715,
+      "team_return_ci": 25.734,
+      "recovered_pct": 59.5566,
+      "msgs_per_step": 48.0,
+      "gini": 0.0992,
+      "captures": 0.9
+    }
   ]
 }

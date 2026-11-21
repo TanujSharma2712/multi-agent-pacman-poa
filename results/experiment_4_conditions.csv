@@ -1,0 +1,57 @@
+Condition,Method,Team Return,Return 95% CI,Seed CI,PoA,Gap Recovered (%),Gini Index,Captures,Steps to Clear,Msgs/Step
+main,Random,-1105.22,157.12,0.0,n/a (J<=0),-805.2,0.415,44.15,100.0,0.0
+main,Independent Greedy,877.11,24.33,0.0,1.019,92.6,0.077,1.15,92.25,0.0
+main,Selfish Q-Learning,672.59,44.53,62.94,1.328,0.0,0.329,3.52,99.6,0.0
+main,Equal-Share Q-Learning,595.25,34.57,143.97,1.501,-35.0,0.404,1.92,99.93,0.0
+main,DCOP-DSA (B=12),751.09,23.69,0.0,1.189,35.6,0.096,0.35,100.0,12.0
+main,DCOP-Max-Sum (B=24),811.34,29.26,0.0,1.101,62.8,0.071,0.95,99.0,24.0
+main,Shapley Q-Learning (λ=0.5),748.6,63.57,108.06,1.193,34.4,0.2,4.33,93.38,0.0
+main,Centralized Planner (π*),893.39,19.13,0.0,1.0,100.0,0.09,0.9,88.9,0.0
+calm (β=0),Random,129.33,31.3,0.0,7.326,-128.7,0.296,1.85,100.0,0.0
+calm (β=0),Independent Greedy,867.51,33.5,0.0,1.092,77.6,0.103,0.1,96.3,0.0
+calm (β=0),Selfish Q-Learning,589.8,45.58,224.67,1.606,0.0,0.457,0.25,100.0,0.0
+calm (β=0),Equal-Share Q-Learning,653.88,64.59,337.71,1.449,17.9,0.362,0.42,94.38,0.0
+calm (β=0),DCOP-DSA (B=12),763.86,35.56,0.0,1.24,48.7,0.1,0.0,98.85,12.0
+calm (β=0),DCOP-Max-Sum (B=24),856.46,32.99,0.0,1.106,74.5,0.076,0.05,97.35,24.0
+calm (β=0),Shapley Q-Learning (λ=0.5),720.12,13.58,7.81,1.316,36.4,0.36,0.45,99.98,0.0
+calm (β=0),Centralized Planner (π*),947.5,11.06,0.0,1.0,100.0,0.037,0.1,88.05,0.0
+dangerous (β=0.9),Random,-2164.17,213.26,0.0,n/a (J<=0),-1350.4,0.377,76.9,100.0,0.0
+dangerous (β=0.9),Independent Greedy,863.88,26.95,0.0,1.008,96.7,0.092,1.8,88.35,0.0
+dangerous (β=0.9),Selfish Q-Learning,661.52,26.79,47.82,1.316,0.0,0.34,3.73,99.3,0.0
+dangerous (β=0.9),Equal-Share Q-Learning,594.8,46.46,115.38,1.464,-31.9,0.357,5.53,99.42,0.0
+dangerous (β=0.9),DCOP-DSA (B=12),741.02,22.71,0.0,1.175,38.0,0.077,2.0,100.0,12.0
+dangerous (β=0.9),DCOP-Max-Sum (B=24),803.66,34.75,0.0,1.084,67.9,0.082,1.55,98.55,24.0
+dangerous (β=0.9),Shapley Q-Learning (λ=0.5),608.67,96.01,98.86,1.431,-25.3,0.323,4.95,97.87,0.0
+dangerous (β=0.9),Centralized Planner (π*),870.77,14.77,0.0,1.0,100.0,0.073,1.8,86.2,0.0
+scarce (50% pellets),Random,-1266.58,157.81,0.0,n/a (J<=0),-1036.1,0.363,44.15,100.0,0.0
+scarce (50% pellets),Independent Greedy,393.85,22.91,0.0,1.042,88.7,0.089,0.65,79.75,0.0
+scarce (50% pellets),Selfish Q-Learning,262.94,16.87,20.94,1.561,0.0,0.4,1.5,97.8,0.0
+scarce (50% pellets),Equal-Share Q-Learning,95.79,52.56,155.52,4.286,-113.2,0.518,1.92,100.0,0.0
+scarce (50% pellets),DCOP-DSA (B=12),258.68,16.13,0.0,1.587,-2.9,0.189,0.4,100.0,12.0
+scarce (50% pellets),DCOP-Max-Sum (B=24),330.09,19.44,0.0,1.244,45.5,0.126,0.55,95.8,24.0
+scarce (50% pellets),Shapley Q-Learning (λ=0.5),253.6,36.8,169.42,1.619,-6.3,0.328,1.6,93.07,0.0
+scarce (50% pellets),Centralized Planner (π*),410.56,12.35,0.0,1.0,100.0,0.079,0.5,74.0,0.0
+small_grid,Random,-1986.05,178.86,0.0,n/a (J<=0),-6578.1,0.423,63.1,93.35,0.0
+small_grid,Independent Greedy,95.9,42.92,0.0,1.569,-70.7,0.375,1.85,25.7,0.0
+small_grid,Selfish Q-Learning,118.51,19.85,8.62,1.27,0.0,0.329,1.37,24.42,0.0
+small_grid,Equal-Share Q-Learning,118.05,24.14,22.14,1.275,-1.4,0.316,1.45,23.43,0.0
+small_grid,DCOP-DSA (B=12),106.47,42.12,0.0,1.414,-37.6,0.309,1.55,26.85,12.0
+small_grid,DCOP-Max-Sum (B=24),107.62,44.75,0.0,1.398,-34.0,0.319,1.65,25.85,24.0
+small_grid,Shapley Q-Learning (λ=0.5),108.47,20.37,7.59,1.387,-31.4,0.321,1.57,24.45,0.0
+small_grid,Centralized Planner (π*),150.5,27.92,0.0,1.0,100.0,0.274,0.65,24.3,0.0
+medium_classic,Random,-1495.9,156.29,0.0,n/a (J<=0),-5264.6,0.393,52.15,100.0,0.0
+medium_classic,Independent Greedy,322.98,39.04,0.0,1.081,23.7,0.222,1.25,39.2,0.0
+medium_classic,Selfish Q-Learning,314.82,16.54,23.8,1.109,0.0,0.252,1.3,40.17,0.0
+medium_classic,Equal-Share Q-Learning,240.99,36.29,73.29,1.449,-214.7,0.347,3.07,43.72,0.0
+medium_classic,DCOP-DSA (B=12),319.59,24.89,0.0,1.093,13.9,0.211,0.75,45.15,12.0
+medium_classic,DCOP-Max-Sum (B=24),295.45,42.16,0.0,1.182,-56.3,0.254,1.55,46.35,24.0
+medium_classic,Shapley Q-Learning (λ=0.5),295.74,23.32,8.8,1.181,-55.5,0.266,1.95,38.63,0.0
+medium_classic,Centralized Planner (π*),349.22,22.03,0.0,1.0,100.0,0.196,0.65,38.75,0.0
+open_contention,Random,-1578.25,174.81,0.0,n/a (J<=0),-4943.8,0.435,56.4,100.0,0.0
+open_contention,Independent Greedy,405.7,17.24,0.0,1.049,49.6,0.124,0.45,49.75,0.0
+open_contention,Selfish Q-Learning,386.0,19.27,4.04,1.103,0.0,0.152,1.52,40.65,0.0
+open_contention,Equal-Share Q-Learning,178.96,73.89,271.26,2.379,-521.1,0.295,4.52,60.87,0.0
+open_contention,DCOP-DSA (B=12),365.32,35.88,0.0,1.165,-52.0,0.156,1.15,54.4,12.0
+open_contention,DCOP-Max-Sum (B=24),412.73,15.57,0.0,1.031,67.3,0.132,0.4,47.25,24.0
+open_contention,Shapley Q-Learning (λ=0.5),351.43,25.18,59.28,1.211,-87.0,0.255,2.13,43.37,0.0
+open_contention,Centralized Planner (π*),425.73,13.76,0.0,1.0,100.0,0.131,0.25,43.35,0.0

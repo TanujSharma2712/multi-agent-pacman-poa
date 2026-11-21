@@ -46,8 +46,18 @@ class MultiAgentPacmanEnv:
         max_steps: int = 100,
         discount_factor: float = 0.99,
         seed: Optional[int] = None,
+        pellet_density: float = 1.0,
+        pellet_seed: int = 0,
     ):
+        """
+        pellet_density: fraction of the layout's pellets kept (1.0 = all). Used to
+            create pellet SCARCITY (Hypothesis H1). The kept subset is drawn with a
+            dedicated RNG seeded by pellet_seed, so every method evaluated on the
+            same (layout, density, pellet_seed) sees the identical pellet map.
+        """
         self.layout_name = layout_name
+        self.pellet_density = pellet_density
+        self.pellet_seed = pellet_seed
         self.raw_grid = get_layout(layout_name)
         self.height = len(self.raw_grid)
         self.width = len(self.raw_grid[0])
@@ -73,6 +83,7 @@ class MultiAgentPacmanEnv:
         self.initial_pellet_set: Set[Tuple[int, int]] = set()
 
         self._parse_layout()
+        self._apply_pellet_density()
         self._precompute_shortest_paths()
 
         # Dynamic state
@@ -139,6 +150,16 @@ class MultiAgentPacmanEnv:
             cand = available_open[-(len(self.default_ghost_starts) + 1) % len(available_open)]
             if cand not in self.default_ghost_starts:
                 self.default_ghost_starts.append(cand)
+
+    def _apply_pellet_density(self):
+        """Keep only a fixed random fraction of pellets (pellet scarcity)."""
+        if self.pellet_density >= 1.0:
+            return
+        all_pellets = sorted(self.initial_pellet_set)
+        n_keep = max(1, int(round(self.pellet_density * len(all_pellets))))
+        kept = random.Random(self.pellet_seed).sample(all_pellets, n_keep)
+        self.initial_pellet_set = set(kept)
+        self.power_pellets &= self.initial_pellet_set
 
     def _precompute_shortest_paths(self):
         """BFS all-pairs shortest paths on open cells."""

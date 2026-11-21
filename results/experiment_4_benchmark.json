@@ -1,82 +1,122 @@
-[
-  {
-    "Method": "Random",
-    "Team Return": -1161.09,
-    "Return 95% CI": 191.12,
-    "PoA": 1.0,
-    "Gap Recovered (%)": 0.0,
-    "Gini Index": 0.414,
-    "Captures": 46.05,
-    "Steps to Clear": 100.0
+{
+  "k": 3,
+  "ghosts": 2,
+  "eval_episodes": 20,
+  "train_seeds": [
+    0,
+    1,
+    2
+  ],
+  "condition": {
+    "name": "main",
+    "layout": "proposal_maze",
+    "beta": 0.5,
+    "density": 1.0
   },
-  {
-    "Method": "Independent Greedy",
-    "Team Return": 861.53,
-    "Return 95% CI": 31.9,
-    "PoA": 1.061,
-    "Gap Recovered (%)": 79.0,
-    "Gini Index": 0.09,
-    "Captures": 0.85,
-    "Steps to Clear": 93.9
-  },
-  {
-    "Method": "Selfish Q-Learning",
-    "Team Return": 664.39,
-    "Return 95% CI": 29.1,
-    "PoA": 1.376,
-    "Gap Recovered (%)": 0.0,
-    "Gini Index": 0.359,
-    "Captures": 1.95,
-    "Steps to Clear": 100.0
-  },
-  {
-    "Method": "Equal-Share Q-Learning",
-    "Team Return": 852.19,
-    "Return 95% CI": 30.85,
-    "PoA": 1.073,
-    "Gap Recovered (%)": 75.2,
-    "Gini Index": 0.102,
-    "Captures": 2.4,
-    "Steps to Clear": 91.4
-  },
-  {
-    "Method": "DCOP-DSA (B=12)",
-    "Team Return": 732.18,
-    "Return 95% CI": 40.95,
-    "PoA": 1.248,
-    "Gap Recovered (%)": 27.2,
-    "Gini Index": 0.096,
-    "Captures": 0.95,
-    "Steps to Clear": 99.9
-  },
-  {
-    "Method": "DCOP-Max-Sum (B=24)",
-    "Team Return": 820.0,
-    "Return 95% CI": 24.38,
-    "PoA": 1.115,
-    "Gap Recovered (%)": 62.3,
-    "Gini Index": 0.076,
-    "Captures": 0.95,
-    "Steps to Clear": 99.15
-  },
-  {
-    "Method": "Shapley Q-Learning (\u03bb=0.5)",
-    "Team Return": 713.52,
-    "Return 95% CI": 32.84,
-    "PoA": 1.281,
-    "Gap Recovered (%)": 19.7,
-    "Gini Index": 0.317,
-    "Captures": 2.5,
-    "Steps to Clear": 100.0
-  },
-  {
-    "Method": "Centralized Planner (\u03c0*)",
-    "Team Return": 914.05,
-    "Return 95% CI": 24.53,
-    "PoA": 1.0,
-    "Gap Recovered (%)": 100.0,
-    "Gini Index": 0.065,
-    "Captures": 0.5,
-    "Steps to Clear": 88.1
-  }
-]
+  "rows": [
+    {
+      "Condition": "main",
+      "Method": "Random",
+      "Team Return": -1105.22,
+      "Return 95% CI": 157.12,
+      "Seed CI": 0.0,
+      "PoA": "n/a (J<=0)",
+      "Gap Recovered (%)": -805.2,
+      "Gini Index": 0.415,
+      "Captures": 44.15,
+      "Steps to Clear": 100.0,
+      "Msgs/Step": 0.0
+    },
+    {
+      "Condition": "main",
+      "Method": "Independent Greedy",
+      "Team Return": 877.11,
+      "Return 95% CI": 24.33,
+      "Seed CI": 0.0,
+      "PoA": 1.019,
+      "Gap Recovered (%)": 92.6,
+      "Gini Index": 0.077,
+      "Captures": 1.15,
+      "Steps to Clear": 92.25,
+      "Msgs/Step": 0.0
+    },
+    {
+      "Condition": "main",
+      "Method": "Selfish Q-Learning",
+      "Team Return": 672.59,
+      "Return 95% CI": 44.53,
+      "Seed CI": 62.94,
+      "PoA": 1.328,
+      "Gap Recovered (%)": 0.0,
+      "Gini Index": 0.329,
+      "Captures": 3.52,
+      "Steps to Clear": 99.6,
+      "Msgs/Step": 0.0
+    },
+    {
+      "Condition": "main",
+      "Method": "Equal-Share Q-Learning",
+      "Team Return": 595.25,
+      "Return 95% CI": 34.57,
+      "Seed CI": 143.97,
+      "PoA": 1.501,
+      "Gap Recovered (%)": -35.0,
+      "Gini Index": 0.404,
+      "Captures": 1.92,
+      "Steps to Clear": 99.93,
+      "Msgs/Step": 0.0
+    },
+    {
+      "Condition": "main",
+      "Method": "DCOP-DSA (B=12)",
+      "Team Return": 751.09,
+      "Return 95% CI": 23.69,
+      "Seed CI": 0.0,
+      "PoA": 1.189,
+      "Gap Recovered (%)": 35.6,
+      "Gini Index": 0.096,
+      "Captures": 0.35,
+      "Steps to Clear": 100.0,
+      "Msgs/Step": 12.0
+    },
+    {
+      "Condition": "main",
+      "Method": "DCOP-Max-Sum (B=24)",
+      "Team Return": 811.34,
+      "Return 95% CI": 29.26,
+      "Seed CI": 0.0,
+      "PoA": 1.101,
+      "Gap Recovered (%)": 62.8,
+      "Gini Index": 0.071,
+      "Captures": 0.95,
+      "Steps to Clear": 99.0,
+      "Msgs/Step": 24.0
+    },
+    {
+      "Condition": "main",
+      "Method": "Shapley Q-Learning (λ=0.5)",
+      "Team Return": 748.6,
+      "Return 95% CI": 63.57,
+      "Seed CI": 108.06,
+      "PoA": 1.193,
+      "Gap Recovered (%)": 34.4,
+      "Gini Index": 0.2,
+      "Captures": 4.33,
+      "Steps to Clear": 93.38,
+      "Msgs/Step": 0.0
+    },
+    {
+      "Condition": "main",
+      "Method": "Centralized Planner (π*)",
+      "Team Return": 893.39,
+      "Return 95% CI": 19.13,
+      "Seed CI": 0.0,
+      "PoA": 1.0,
+      "Gap Recovered (%)": 100.0,
+      "Gini Index": 0.09,
+      "Captures": 0.9,
+      "Steps to Clear": 88.9,
+      "Msgs/Step": 0.0
+    }
+  ]
+}

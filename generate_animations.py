@@ -230,12 +230,6 @@ def generate_side_by_side_gif(num_steps: int = 50, out_path: str = "plots/compar
     )
     print(f"Animated comparison GIF saved to {out_path} ({len(frames)} frames)")
 
-    # Copy to media/
-    import shutil
-    media_path = os.path.join("media", os.path.basename(out_path))
-    shutil.copy(out_path, media_path)
-    print(f"Copied to {media_path}")
-
 
 def generate_single_policy_gif(policy_type: str = "dcop", num_steps: int = 40, out_path: str = "plots/pacman_dcop_simulation.gif"):
     print(f"Generating single policy GIF for {policy_type}...")
@@ -306,11 +300,6 @@ def generate_single_policy_gif(policy_type: str = "dcop", num_steps: int = 40, o
         loop=0,
     )
     print(f"Animated GIF saved to {out_path} ({len(frames)} frames)")
-
-    import shutil
-    media_path = os.path.join("media", os.path.basename(out_path))
-    shutil.copy(out_path, media_path)
-    print(f"Copied to {media_path}")
 
 
 if __name__ == "__main__":

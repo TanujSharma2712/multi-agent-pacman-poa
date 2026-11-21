@@ -41,7 +41,7 @@ from src.trainer import train_q_learning
 class PacmanGameApp:
     def __init__(self, root: tk.Tk):
         self.root = root
-        self.root.title("Multi-Agent Pac-Man: Interactive Play & PoA Testbed (CS329)")
+        self.root.title("Multi-Agent Pac-Man: Interactive Play & PoA Testbed (CS 329: Foundations of AI: Multi-Agent Systems)")
         self.root.configure(bg="#030712")
 
         # Game state parameters
@@ -128,7 +128,7 @@ class PacmanGameApp:
 
         subtitle_lbl = tk.Label(
             top_left,
-            text="CS329 Multi-Agent Systems | IIT Gandhinagar",
+            text="CS 329: Foundations of AI: Multi-Agent Systems | IIT Gandhinagar",
             font=("Arial", 9),
             fg="#94a3b8",
             bg="#0b1739",
@@ -593,6 +593,8 @@ class PacmanGameApp:
             self.cell_size = new_cell_size
             self.recompute_board_dimensions()
             self.draw_maze()
+            if getattr(self, "game_over", False):
+                self.draw_game_over()
 
     def recompute_board_dimensions(self):
         canvas_w = self.env.width * self.cell_size
@@ -632,8 +634,11 @@ class PacmanGameApp:
             elif action == ACTION_RIGHT: self.btn_right.config(bg="#0284c7")
             elif action == ACTION_STAY: self.btn_stay.config(bg="#0284c7")
 
-        if not self.is_running:
-            self.step_environment()
+        # While paused, each move key advances one step; stop and show the
+        # game-over panel when the episode ends (never step past the end).
+        if not self.is_running and not getattr(self, "game_over", False):
+            if self.step_environment():
+                self._finish_game()
 
     def on_speed_change(self, val):
         self.step_delay = int(val)
@@ -646,6 +651,9 @@ class PacmanGameApp:
         self.gamma = 1.0
         self.agent_rewards = [0.0] * self.num_pacman
         self.messages_used = 0
+        self.game_over = False
+        self.initial_pellets = len(self.env.pellets)
+        self.facing = self._initial_facing()
         self.current_action = ACTION_RIGHT
         self.queued_action = ACTION_RIGHT
         if hasattr(self, "lbl_heading") and self.lbl_heading.winfo_exists():
@@ -653,7 +661,13 @@ class PacmanGameApp:
         self.draw_maze()
         self.update_hud()
 
+    def _initial_facing(self):
+        """Start facing right, except P3 who starts on the right side facing left."""
+        return [ACTION_LEFT if i == 2 else ACTION_RIGHT for i in range(self.num_pacman)]
+
     def toggle_run(self):
+        if getattr(self, "game_over", False):
+            self.reset_game()  # "↺ RESTART" really restarts
         self.is_running = not self.is_running
         if self.is_running:
             self.btn_run.config(text="⏸ PAUSE", bg="#f59e0b")
@@ -668,12 +682,81 @@ class PacmanGameApp:
         if not done:
             self.root.after(self.step_delay, self._game_loop)
         else:
-            self.is_running = False
-            self.btn_run.config(text="↺ RESTART", bg="#10b981")
+            self._finish_game()
 
     def single_step(self):
-        if not self.is_running:
-            self.step_environment()
+        if not self.is_running and not getattr(self, "game_over", False):
+            if self.step_environment():
+                self._finish_game()
+
+    def _finish_game(self):
+        self.is_running = False
+        self.game_over = True
+        self.btn_run.config(text="↺ RESTART", bg="#10b981")
+        self.draw_game_over()
+
+    def draw_game_over(self):
+        """Game-over panel drawn on top of the final board."""
+        cv = self.canvas
+        w = max(cv.winfo_width(), int(cv.cget("width") or 0))
+        h = max(cv.winfo_height(), int(cv.cget("height") or 0))
+        cleared = len(self.env.pellets) == 0
+        k = self.num_pacman
+        eaten = self.initial_pellets - len(self.env.pellets)
+        gini = compute_gini_index(self.agent_rewards)
+
+        # dimmed background and card
+        cv.create_rectangle(0, 0, w, h, fill="#020617", stipple="gray50", outline="", tags="gameover")
+        cw, ch = min(440, w - 40), min(150 + 26 * k + 70, h - 30)
+        x0, y0 = (w - cw) / 2, (h - ch) / 2
+        cv.create_rectangle(x0, y0, x0 + cw, y0 + ch, fill="#0b1430", outline="#facc15", width=3, tags="gameover")
+
+        cx = w / 2
+        y = y0 + 28
+        title = "🏆 MAZE CLEARED!" if cleared else "⏱ TIME UP!"
+        cv.create_text(cx, y, text=title, fill="#4ade80" if cleared else "#facc15",
+                       font=("Arial", 22, "bold"), tags="gameover")
+        y += 28
+        sub = (f"All {self.initial_pellets} pellets eaten in {self.env.step_count} steps."
+               if cleared else
+               f"Step limit of {self.env.max_steps} reached, {len(self.env.pellets)} pellets left.")
+        cv.create_text(cx, y, text=sub, fill="#94a3b8", font=("Arial", 10), tags="gameover")
+        y += 26
+        cv.create_text(cx, y, fill="#f8fafc", font=("Arial", 11, "bold"), tags="gameover",
+                       text=(f"Score {self.score:.0f}   |   Pellets {eaten}/{self.initial_pellets}   |   "
+                             f"Captures {self.env.total_captures}   |   Gini {gini:.3f}"))
+        y += 28
+
+        # per-agent table
+        cols = [x0 + cw * f for f in (0.18, 0.43, 0.63, 0.83)]
+        for c, head in zip(cols, ("Pac-Man", "Pellets", "Captured", "Return")):
+            cv.create_text(c, y, text=head, fill="#94a3b8", font=("Arial", 10, "bold"), tags="gameover")
+        y += 20
+        colors = ["#00e5ff", "#ffd600", "#ff4081", "#4ade80", "#c084fc"]
+        pellets_by = list(self.env.agent_pellets)
+        for i in range(k):
+            name = "P1 (YOU)" if (self.is_human_mode() and i == 0) else f"P{i + 1}"
+            vals = (name, pellets_by[i], self.env.agent_captures[i], f"{self.agent_rewards[i]:.0f}")
+            for j, (c, v) in enumerate(zip(cols, vals)):
+                cv.create_text(c, y, text=str(v), fill=colors[i % len(colors)] if j == 0 else "#e2e8f0",
+                               font=("Arial", 10, "bold" if j == 0 else "normal"), tags="gameover")
+            y += 22
+
+        best = max(pellets_by) if pellets_by else 0
+        leaders = [i for i, v in enumerate(pellets_by) if v == best]
+        if best == 0:
+            msg = "Nobody ate a pellet this round."
+        elif len(leaders) > 1:
+            msg = "Tie for top harvester: " + ", ".join(f"P{i + 1}" for i in leaders) + f" ({best} each)"
+        else:
+            i = leaders[0]
+            who = "YOU (P1)" if (self.is_human_mode() and i == 0) else f"P{i + 1}"
+            msg = f"Top harvester: {who} with {best} pellets"
+        y += 6
+        cv.create_text(cx, y, text=msg, fill="#facc15", font=("Arial", 10, "bold"), tags="gameover")
+        y += 22
+        cv.create_text(cx, y, text="Press ↺ RESTART to play again", fill="#94a3b8",
+                       font=("Arial", 9, "italic"), tags="gameover")
 
     def step_environment(self) -> bool:
         joint_action = [ACTION_STAY] * self.num_pacman
@@ -741,6 +824,17 @@ class PacmanGameApp:
             else:  # Selfish Greedy
                 joint_action = [self.greedy_agents[i].get_action(self.env) for i in range(self.num_pacman)]
 
+        # Each Pac-Man faces the way it actually moves (blocked moves and Stay keep the old facing)
+        if not hasattr(self, "facing") or len(self.facing) != self.num_pacman:
+            self.facing = self._initial_facing()
+        for i, a in enumerate(joint_action):
+            if a == ACTION_STAY:
+                continue
+            dx, dy = ACTION_DELTAS[a]
+            x, y = self.env.pacman_positions[i]
+            if (x + dx, y + dy) in self.env.open_cells:
+                self.facing[i] = a
+
         _, rewards, done, info = self.env.step(joint_action)
         for i in range(self.num_pacman):
             self.agent_rewards[i] += rewards[i]
@@ -757,14 +851,49 @@ class PacmanGameApp:
         self.lbl_captures.config(text=f"Captures: {self.env.total_captures}")
         self.lbl_steps.config(text=f"Steps: {self.env.step_count}")
 
-        # Compute Gini index across agents (from Experiment 3)
-        gini = compute_gini_index(self.agent_rewards) if sum(self.agent_rewards) > 0 else 0.0
+        # Live Gini index across agents (same formula as src/metrics.py)
+        gini = compute_gini_index(self.agent_rewards)
         self.lbl_gini.config(text=f"Gini: {gini:.3f}")
 
-        # Live PoA
-        benchmark_opt = 911.0 if self.layout_name == "proposal_maze" else 450.0
-        current_poa = max(1.0, benchmark_opt / max(1.0, self.score)) if self.score > 0 else 1.000
-        self.lbl_poa.config(text=f"Live PoA: {current_poa:.3f}")
+        # Benchmark PoA: measured in the Python experiments (report), not computed live
+        poa = self.benchmark_poa()
+        self.lbl_poa.config(text=f"Benchmark PoA: {poa:.3f}" if poa is not None else "Benchmark PoA: n/a")
+
+    # Measured PoA from results/experiment_4_conditions.json (k=3, 2 ghosts, beta=0.5)
+    # and results/experiment_2.json (Max-Sum budget sweep, m=3).
+    BENCH_POA = {
+        "proposal_maze": {"Max-Sum": 1.101, "DSA": 1.189, "Shapley": 1.193, "Equal-Share": 1.501,
+                          "Centralized": 1.000, "Greedy": 1.019},
+        "small_grid": {"Max-Sum": 1.398, "DSA": 1.414, "Shapley": 1.387, "Equal-Share": 1.275,
+                       "Centralized": 1.000, "Greedy": 1.569},
+        "medium_classic": {"Max-Sum": 1.182, "DSA": 1.093, "Shapley": 1.181, "Equal-Share": 1.449,
+                           "Centralized": 1.000, "Greedy": 1.081},
+        "open_contention": {"Max-Sum": 1.031, "DSA": 1.165, "Shapley": 1.211, "Equal-Share": 2.379,
+                            "Centralized": 1.000, "Greedy": 1.049},
+    }
+    EXP2_MAXSUM_J = {0: 735.3, 6: 735.3, 12: 805.6, 24: 826.2, 36: 799.2, 48: 776.7}
+    EXP2_OPT_J = 905.1
+
+    def benchmark_poa(self):
+        """Measured PoA for the current setting, or None when it was not measured
+        (human mode, team size other than 3, ghost count other than 2, Random)."""
+        if (self.is_human_mode() or self.num_pacman != 3 or self.env.num_ghosts != 2
+                or abs(self.ghost_beta - 0.5) > 1e-9):
+            return None
+        algo = self.auto_team_mode.get()
+        table = self.BENCH_POA.get(self.layout_name)
+        if table is None:
+            return None
+        if "Max-Sum" in algo:
+            if self.layout_name == "proposal_maze" and self.dcop_budget in self.EXP2_MAXSUM_J:
+                return self.EXP2_OPT_J / self.EXP2_MAXSUM_J[self.dcop_budget]
+            return table["Max-Sum"] if self.dcop_budget == 24 else None
+        if "DSA" in algo:
+            return table["DSA"] if self.dcop_budget == 12 else None  # measured at B=12 only
+        for key, val in table.items():
+            if key in algo:
+                return val
+        return None
 
     def draw_maze(self):
         self.canvas.delete("all")
@@ -811,8 +940,11 @@ class PacmanGameApp:
                 self.canvas.create_oval(cx - r - 4, cy - r - 4, cx + r + 4, cy + r + 4, outline="#00e5ff", width=2)
                 self.canvas.create_text(cx, cy - r - 8, text="YOU", fill="#00e5ff", font=("Arial", max(7, cs // 4), "bold"))
 
-            # Draw Pac-Man wedge mouth
-            start_ang = 30 if i != 2 else 210
+            # Draw Pac-Man wedge with the mouth pointing where it is moving.
+            # Tk angles: 0 = right, 90 = up, 180 = left, 270 = down (counter-clockwise).
+            facing = self.facing[i] if hasattr(self, "facing") and i < len(self.facing) else ACTION_RIGHT
+            mouth_center = {ACTION_RIGHT: 0, ACTION_UP: 90, ACTION_LEFT: 180, ACTION_DOWN: 270}.get(facing, 0)
+            start_ang = mouth_center + 30
             extent_ang = 300
             self.canvas.create_arc(
                 cx - r, cy - r, cx + r, cy + r,

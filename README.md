@@ -2,17 +2,17 @@
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Course: CS329 Multi-Agent Systems](https://img.shields.io/badge/Course-CS329%20MAS-green.svg)](https://iitgn.ac.in)
-[![Status: Complete](https://img.shields.io/badge/Status-100%25%20Verified-brightgreen.svg)]()
-[![Play Online](https://img.shields.io/badge/🎮_Play_Live-Online_Arcade-ff007f.svg?style=for-the-badge)](https://tanujsharma2712.github.io/multi-agent-pacman-poa/)
+[![Course: CS 329 Foundations of AI: Multi-Agent Systems](https://img.shields.io/badge/Course-CS%20329%20Foundations%20of%20AI%3A%20MAS-green.svg)](https://iitgn.ac.in)
+[![Status: Complete](https://img.shields.io/badge/Status-Complete-brightgreen.svg)]()
+[![Play Online](https://img.shields.io/badge/🎮_Play_Live-Online_Arcade-ff007f.svg?style=for-the-badge)](https://rajput-vivek-16.github.io/multi-agent-pacman-poa/)
 
-> **CS329: Multi-Agent Systems — Final Project Report & Testbed**  
+> **CS 329: Foundations of AI: Multi-Agent Systems | Final Project Code & Testbed**  
 > **Indian Institute of Technology Gandhinagar (IITGN)**  
 > **Authors:**
-> - **Tanuj Sharma** (23110331) — `tanuj.sharma@iitgn.ac.in`
-> - **Rajput Vivek** (23110269) — `rajput.vivek@iitgn.ac.in`
-> - **Akash KP** (23110021) — `akash.kp@iitgn.ac.in`  
-> *(Note: Dhruv Jalan's originally planned work on Shapley value credit assignment, reward shaping, and fairness evaluation was fully absorbed and implemented by Tanuj Sharma, while Akash KP led DCOP coordination and Vivek Rajput led baseline & centralized planning).*
+> - **Tanuj Sharma** (23110331): `tanuj.sharma@iitgn.ac.in`
+> - **Rajput Vivek** (23110269): `rajput.vivek@iitgn.ac.in`
+> - **Akash KP** (23110021): `akash.kp@iitgn.ac.in`  
+> *(Note: Dhruv Jalan dropped the course; his planned work on Shapley value credit assignment, reward shaping and fairness evaluation was taken over by Tanuj Sharma. Akash KP led DCOP coordination, and Rajput Vivek led the baselines, centralized planner, exact equilibrium analysis and PoA experiments.)*
 
 ---
 
@@ -21,7 +21,7 @@
 > **You can test and play this multi-agent game right now with zero friction!**
 > 
 > * **🌐 Option A: Instant Web Arcade (Anyone Can Play With This Link!)**  
->   **👉 Direct Live Link: [https://tanujsharma2712.github.io/multi-agent-pacman-poa/](https://tanujsharma2712.github.io/multi-agent-pacman-poa/)**  
+>   **👉 Direct Live Link: [https://rajput-vivek-16.github.io/multi-agent-pacman-poa/](https://rajput-vivek-16.github.io/multi-agent-pacman-poa/)**  
 >   *(Zero setup required: works in any web browser on desktop, laptop, tablet, or smartphone! You can also double-click [**`index.html`**](index.html) or [**`play.html`**](play.html) locally).*
 > 
 > * **🖥️ Option B: Desktop Python GUI (75% Arcade Board / 25% Control Station)**  
@@ -34,10 +34,11 @@
 > | Feature | How to Use | What Happens |
 > | :--- | :--- | :--- |
 > | **🎮 Play as P1 (Human)** | Select **`[●] 🎮 Human Player`** mode | You steer Pac-Man 1 ($P_1$, Cyan with "YOU" tag) using **Arrow Keys**, **WASD**, or the on-screen **D-Pad** (`▲`, `◄`, `⏹`, `►`, `▼`). |
-> | **🤝 Pick AI Teammates** | Choose from the Teammates dropdown | $P_2, P_3$ dynamically coordinate alongside you via **DCOP Max-Sum**, **DCOP DSA**, **Shapley Q-Learning**, or **Selfish Greedy**. |
-> | **🤖 Autonomous Watch** | Select **`[●] 🤖 Autonomous AI`** mode | "YOU" tag disappears; all agents coordinate autonomously under the selected multi-agent joint algorithm. |
-> | **🧪 Live Experimentation** | Use the **Experimental Controls** panel | Adjust Team Size $k \in [2, 5]$, Ghosts $M \in [0, 4]$, Ghost Aggression $\beta$, DCOP Budget $B$, and Shapley $\lambda$, then click **`⚙ Apply Scenario Settings`** to test any experimental condition live! |
-> | **📊 Real-Time HUD** | Watch the top statistics bar | Tracks Score, Pellets remaining, Captures, Steps, live **Price of Anarchy ($\mathrm{PoA}$)**, and **Gini Fairness Index** on every step. |
+> | **🤝 Pick AI Teammates** | Choose from the Teammates dropdown | Your teammates ($P_2$ to $P_k$) play with **DCOP Max-Sum**, **DCOP DSA**, **Shapley Q-Learning**, **Equal-Share Q-Learning** or **Selfish Greedy** (desktop); the web game offers a subset. |
+> | **🤖 Autonomous Watch** | Select **`[●] 🤖 Autonomous AI`** mode | "YOU" tag disappears; all agents follow the selected algorithm, including the **Centralized Planner** and **Random** play. |
+> | **🧪 Live Experimentation** | Use the **Experimental Controls** panel | Adjust Team Size $k$ (2 to 5), Ghosts (0 to 4 desktop, 0 to 3 web), Ghost Aggression $\beta$, DCOP Budget $B$ and Shapley $\lambda$, then click **`⚙ Apply Scenario Settings`**. |
+> | **📊 Status Bar** | Watch the top statistics bar | Score, pellets left, captures, steps and the **Gini index** are computed **live**; the **Benchmark PoA** shows the value *measured in our experiments* for the selected setting ("n/a" where nothing was measured). |
+> | **🏁 Game Over** | Clear the maze or reach 100 steps | A game-over panel shows **MAZE CLEARED!** or **TIME UP!**, the team score, pellets eaten, captures, Gini index, a per-player table (your row marked **P1 (YOU)**) and the top harvester. Press **↺ RESTART** / **Play Again**. |
 
 ---
 
@@ -53,10 +54,11 @@
    - [Remedy 1: DCOP-Based Region Assignment](#remedy-1-dcop-based-region-assignment)
    - [Remedy 2: Shapley-Value Reward Shaping](#remedy-2-shapley-value-reward-shaping)
 7. [📈 Experimental Results & Hypothesis Verification](#-experimental-results--hypothesis-verification)
-   - [Experiment 1: Team Size $k$ & Ghost Aggression $\beta$ vs. PoA](#experiment-1-team-size-k--ghost-aggression-beta-vs-poa)
-   - [Experiment 2: DCOP Message Budget Recovery (DSA vs. Max-Sum)](#experiment-2-dcop-message-budget-recovery-dsa-vs-max-sum)
-   - [Experiment 3: Shapley Shaping Parameter $\lambda$ & Gini Fairness](#experiment-3-shapley-shaping-parameter-lambda--gini-fairness)
-   - [Experiment 4: Comprehensive Multi-Method Benchmark](#experiment-4-comprehensive-multi-method-benchmark)
+   - [Experiment 1-T: Exact PoA on a Toy Maze](#experiment-1-t-exact-poa-on-a-toy-maze-method-m1)
+   - [Experiment 1: Team Size, Ghost Aggression & Pellet Scarcity](#experiment-1-team-size-ghost-aggression--pellet-scarcity-vs-poa)
+   - [Experiment 2: DCOP Message Budget & Number of Regions](#experiment-2-dcop-message-budget--number-of-regions)
+   - [Experiment 3: Shapley λ Across Ghost Danger](#experiment-3-shapley-λ-across-ghost-danger-h3)
+   - [Experiment 4: Eight Methods Across Seven Conditions](#experiment-4-eight-methods-across-seven-conditions)
 8. [📁 Project Architecture & File Organization](#-project-architecture--file-organization)
 9. [⚙️ Installation & Reproducibility Guide](#️-installation--reproducibility-guide)
 10. [👥 Member Contributions](#-member-contributions)
@@ -68,9 +70,16 @@
 
 When multiple autonomous agents share a common environment with scarce resources, uncoordinated selfish behavior induces severe coordination pathologies: duplicated traversal, contention over identical resources, and failure to take collective risks. We quantify this loss using the game-theoretic **Price of Anarchy ($\mathrm{PoA}$)** in a multi-agent Pac-Man simulation environment where $k$ Pac-Men harvest a shared pool of pellets while evading dangerous ghosts.
 
-We rigorously formulate, implement, and benchmark two contrasting coordination paradigms to recover the selfish performance gap:
-1. **Communication-Based Coordination (DCOP)**: Real-time decentralized spatial partitioning via **Max-Sum** (min-marginal belief propagation over factor graphs) and **DSA** (Distributed Stochastic Algorithm) under strictly bounded per-step message budgets $B$.
-2. **Incentive-Based Learning (Shapley Value)**: Game-theoretic cooperative credit assignment in Multi-Agent Reinforcement Learning (MARL) via counterfactual marginal contributions $\varphi_i$, resolving the classic multi-agent "free-rider" pathology without runtime communication overhead.
+We formulate, implement and benchmark two contrasting ways to recover the selfish performance gap:
+1. **Communication-Based Coordination (DCOP)**: decentralized region assignment via **Max-Sum** (belief propagation over a factor graph) and **DSA** (Distributed Stochastic Algorithm) under a per-step message budget $B$.
+2. **Incentive-Based Learning (Shapley Value)**: independent Q-learners whose rewards are shaped by exact Shapley-value credit $\varphi_i$, which needs no communication at run time.
+
+**Key findings:**
+- On a toy maze solved **exactly** (optimum by dynamic programming, Nash equilibria by iterated best response), selfish play gives an exact **PoA = 1.21**, rising to about 1.46 with aggressive ghosts.
+- On the 21×15 benchmark maze, the estimated PoA reaches **3.38 under pellet scarcity**.
+- **Max-Sum DCOP is the best decentralized remedy**: up to **76.6%** of the selfish gap recovered (62.8% in the main benchmark, 90.8% of the centralized return) with only 24 messages per step.
+- **Shapley shaping is unreliable** with step-level credit (its effect depends strongly on the training seed), and we explain why analytically.
+- A simple **greedy heuristic is a surprisingly strong baseline**, which we report openly.
 
 ---
 
@@ -79,7 +88,7 @@ We rigorously formulate, implement, and benchmark two contrasting coordination p
 You can run and play this game interactively or watch the AI algorithms coordinate in real time using either the **Desktop GUI** or the **Web Browser Arcade Game**:
 
 ### 1. Desktop Python GUI Game (`play_game.py`)
-Built with Python's standard `tkinter` library — **zero extra pip packages required**:
+Built with Python's standard `tkinter` library and running the **same Python agents used in the experiments**:
 
 ```bash
 python play_game.py
@@ -91,23 +100,26 @@ python play_game.py
 - **Two Primary Play Modes**:
   - **`[●] 🎮 Human Player (You Control P1)`**:
     - Steer Pac-Man 1 ($P_1$, glowing Cyan with "YOU" tag) using **Arrow Keys**, **W, A, S, D**, or click the on-screen **D-Pad** (`▲`, `◄`, `⏹`, `►`, `▼`).
+    - Press **PLAY** for real-time play, or keep it paused and **every key press advances one step** (turn-based).
     - Teammates ($P_2, P_3, \ldots$) coordinate alongside you via your choice of DCOP Max-Sum, DCOP DSA, Shapley Q-Learning, Equal-Share, or Selfish Greedy.
   - **`[●] 🤖 Autonomous AI (Watch Full Team)`**:
-    - "YOU" tag disappears; all agents coordinate autonomously under the selected multi-agent joint algorithm.
+    - "YOU" tag disappears; all agents follow the selected algorithm (also Centralized Planner and Random).
 - **🧪 Live Experimental Testbed Panel**:
-  - Directly test conditions from Experiments 1–4 by tweaking:
+  - Directly test conditions from Experiments 1 to 4 by tweaking:
     - **Maze Layout**: `proposal_maze` (21×15), `medium_classic`, `open_contention`, `small_grid`.
     - **Team Size ($k$)**: 2, 3, 4, or 5 Pac-Men.
     - **Ghost Count ($M$) & Hazard ($\beta$)**: 0 to 4 ghosts; aggression parameter $\beta \in [0.0, 1.0]$.
     - **DCOP Budget ($B$)**: 0 to 48 messages per step.
     - **Shapley Weight ($\lambda$)**: $0.0$ (Selfish) to $1.0$ (Pure Shapley).
     - Click **`⚙ Apply Scenario Settings`** to immediately reload and test the customized scenario!
-- **Live Scientific HUD**: Real-time Score, Pellets remaining, Ghost Captures, Step counter, Gini Inequality Index, and live Price of Anarchy ($\mathrm{PoA}$).
+- **Status bar**: Score, pellets left, ghost captures, step counter and Gini index are computed **live** from the game. **Benchmark PoA** shows the PoA *measured in our experiments* for the selected algorithm, layout and budget (it needs many trained episodes, so it cannot be computed from one game) and shows "n/a" for unmeasured settings such as human play or $k \neq 3$.
+- **Pac-Man faces its direction of travel**: each mouth points the way that Pac-Man last moved.
+- **Game-over panel** when all pellets are eaten or 100 steps are reached: result title, team score, pellets eaten, captures, Gini index, a per-player table and the top harvester. **↺ RESTART** starts a fresh game.
 
 ### 2. Standalone Web Browser Game (`play.html`)
-- Open [**`play.html`**](play.html) directly in any web browser (Chrome, Edge, Firefox, Safari).
-- Built with HTML5 Canvas, zero external dependencies, retro CRT glow styling, clickable on-screen D-Pad, keyboard controls, real-time metrics HUD, and the full experimental scenario configuration panel.
-- Can be tested locally or hosted instantly via GitHub Pages.
+- Open [**`play.html`**](play.html) directly in any web browser (Chrome, Edge, Firefox, Safari), or use the live link above (GitHub Pages serves the identical `index.html`).
+- HTML5 Canvas, zero dependencies, on-screen D-Pad and keyboard controls, 2 to 5 Pac-Men and 0 to 3 ghosts, live Gini and per-agent returns, benchmark PoA and gap values from the experiments, and the same game-over panel.
+- **Note:** the browser AI teammates are simplified JavaScript imitations of each algorithm. All numbers in the results come from the Python implementation.
 
 ---
 
@@ -116,29 +128,32 @@ python play_game.py
 <p align="center">
   <img src="plots/fig_maze_simulation.png" alt="Multi-Agent Pac-Man Maze Environment" width="750"/>
   <br>
-  <em>Figure 1: Authentic Retro Arcade Simulation Environment matching Figure 1 of the Project Proposal. The 21×15 maze features 3 balanced vertical sectors (Region A, Region B, Region C) with dashed partition boundaries, 3 Pac-Men ($P_1, P_2, P_3$), 2 Ghosts ($G_1, G_2$), standard food pellets, and 4 corner power pellets.</em>
+  <em>Figure 1: The 21×15 benchmark maze (matching Figure 1 of the project proposal) with 3 vertical sectors (Region A, Region B, Region C) separated by dashed lines, 3 Pac-Men ($P_1, P_2, P_3$), 2 ghosts ($G_1, G_2$), 149 pellets and 4 larger corner pellets (every pellet is worth +10).</em>
 </p>
 
 ### Environmental Characteristics
-- **Graph Representation**: Undirected connected graph $G = (V, E)$ with 154 traversable open cells.
+- **Graph Representation**: Undirected connected graph $G = (V, E)$ with 156 open cells (including the ghost house) and 149 pellets.
 - **Regions for DCOP**:
   - **Region A ($R_1$)**: Columns $1 \le x \le 6$ (48 open cells, West sector).
-  - **Region B ($R_2$)**: Columns $7 \le x \le 13$ (58 open cells, Central sector with ghost house).
+  - **Region B ($R_2$)**: Columns $7 \le x \le 13$ (60 open cells, Central sector with ghost house).
   - **Region C ($R_3$)**: Columns $14 \le x \le 19$ (48 open cells, East sector).
-- **Contention Mechanics**: When multiple Pac-Men enter the same pellet cell simultaneously, exactly one agent is chosen uniformly at random to receive the $+10$ reward, while the others expend their action with zero gain.
-- **Ghost Danger**: Ghosts pursue the nearest Pac-Man along shortest graph paths with probability $\beta$, penalizing caught Pac-Men $-50$ and respawning them at base.
+- **Rewards**: $+10$ per pellet, $-1$ per step for each Pac-Man, $-50$ when caught; episodes end when the maze is cleared or after $T = 100$ steps; returns are discounted with $\gamma = 0.99$.
+- **Contention Mechanics**: When multiple Pac-Men enter the same pellet cell simultaneously, exactly one agent is chosen uniformly at random to receive the $+10$ reward, while the others gain nothing.
+- **Ghost Danger**: Ghosts pursue the nearest Pac-Man along shortest graph paths with probability $\beta$ (otherwise they move randomly); a Pac-Man caught on the same cell or by swapping cells gets $-50$ and respawns at its start.
+- **Pellet Scarcity**: an option keeps only a fixed random fraction of pellets (the same subset for every method), used to test H1.
+- **Six layouts**: `proposal_maze`, `toy_exact` (exact analysis), `toy`, `small_grid`, `medium_classic`, `open_contention`.
 
 ---
 
 ## 🎬 Gameplay Animations & Coordination Visuals
 
-To visually demonstrate the emergence of the Price of Anarchy and its recovery, we provide generated animated simulation recordings:
+Illustrative recordings of single episodes (generated by `generate_animations.py`; for measured performance see the results below):
 
 ### Side-by-Side: Selfish Play vs. DCOP Coordinated Play
 <p align="center">
   <img src="plots/comparison_selfish_vs_dcop.gif" alt="Side-by-Side Gameplay Comparison" width="850"/>
   <br>
-  <em>Figure 2: Animated side-by-side gameplay comparison. <b>Left:</b> Purely Selfish Play leads to severe contention over central pellets, wasted steps, and frequent ghost captures. <b>Right:</b> DCOP Max-Sum deconfliction partitions agents into Region A, B, and C, enabling parallel pellet harvesting with zero redundant collisions.</em>
+  <em>Figure 2: Side-by-side gameplay. <b>Left:</b> selfish agents chase the same nearby pellets and overlap. <b>Right:</b> DCOP Max-Sum assigns agents to Regions A, B and C so they harvest in parallel with far less overlap.</em>
 </p>
 
 ### DCOP Coordinated Max-Sum & Shapley Q-Learning Gameplay
@@ -147,27 +162,27 @@ To visually demonstrate the emergence of the Price of Anarchy and its recovery, 
   &nbsp;&nbsp;
   <img src="plots/pacman_shapley_simulation.gif" alt="Shapley Value Learning Simulation" width="420"/>
   <br>
-  <em>Figure 3: High-framerate animations. <b>Left:</b> DCOP Max-Sum agents executing synchronized region-sweeping policies. <b>Right:</b> Cooperative Shapley-shaped Q-learning agents deconflicting paths and sharing pellets equitably.</em>
+  <em>Figure 3: <b>Left:</b> DCOP Max-Sum agents sweeping their assigned regions. <b>Right:</b> Shapley-shaped Q-learning agents (λ = 0.5).</em>
 </p>
 
 ---
 
 ## 📊 Benchmark Summary Table
 
-The table below presents the quantitative evaluation across all 8 baselines and remedies on the 21×15 benchmark environment (25 evaluation episodes per configuration, 95% confidence intervals):
+Main condition: 21×15 benchmark maze, k = 3 Pac-Men, 2 ghosts, β = 0.5. 20 evaluation episodes per configuration; every learned method is trained with **3 seeds** and the episodes are pooled. "Gap recovered" is 0% for selfish Q-learning and 100% for the centralized planner (negative = worse than selfish).
 
-| Method | Paradigm | Expected Return $J(\pi)$ | 95% Conf. Interval | Price of Anarchy ($\mathrm{PoA}$) | Selfish Gap Recovered | Fairness (Gini Index) | Ghost Captures | Steps to Clear |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Random Baseline** | Uncoordinated | $-1161.1$ | $\pm 191.1$ | $1.000^\dagger$ | $0.0\%$ | $0.414$ | $46.05$ | $100.0$ |
-| **Selfish Q-Learning ($\lambda=0$)** | Independent MARL | $664.4$ | $\pm 29.1$ | **$1.376$** | **$0.0\%$ (Ref)** | $0.359$ | $1.95$ | $100.0$ |
-| **Independent Greedy** | Local Heuristic | $861.5$ | $\pm 31.9$ | $1.061$ | $79.0\%$ | $0.090$ | $0.85$ | $93.9$ |
-| **Equal-Share Q-Learning** | Naive Sharing | $852.2$ | $\pm 30.9$ | $1.073$ | $75.2\%$ | $0.102$ | $2.40$ | $91.4$ |
-| **DCOP-DSA ($B=12$)** | Communication | $732.2$ | $\pm 41.0$ | $1.248$ | **$27.2\%$** | $0.096$ | **$0.95$** | $99.9$ |
-| **DCOP-Max-Sum ($B=24$)** | Communication | **$820.0$** | $\pm 24.4$ | **$1.115$** | **$62.3\%$** | **$0.076$** | **$0.95$** | $99.2$ |
-| **Shapley Q-Learning ($\lambda=0.5$)** | Incentive MARL | $713.5$ | $\pm 32.8$ | $1.281$ | **$19.7\%$** | $0.317$ | $2.50$ | $100.0$ |
-| **Centralized Social Optimum ($\pi^\star$)** | Omniscient Hungarian | **$914.1$** | $\pm 24.5$ | **$1.000$** | **$100.0\%$** | **$0.065$** | **$0.50$** | **$88.1$** |
+| Method | Paradigm | Team Return $J$ | 95% CI | Est. PoA | Gap Recovered | Gini | Msgs/step |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| Random | Uncoordinated | $-1105.2$ | $\pm 157.1$ | n/a | $-805.2\%$ | $0.415$ | 0 |
+| Selfish Q-Learning ($\lambda=0$) | Independent MARL | $672.6$ | $\pm 44.5$ | $1.328$ | $0\%$ (ref) | $0.329$ | 0 |
+| Independent Greedy | Local heuristic | $877.1$ | $\pm 24.3$ | $1.019$ | $92.6\%$ | $0.077$ | 0 |
+| Equal-Share Q-Learning | Naive sharing | $595.2$ | $\pm 34.6$ | $1.501$ | $-35.0\%$ | $0.404$ | 0 |
+| DCOP-DSA ($B=12$) | Communication | $751.1$ | $\pm 23.7$ | $1.189$ | $35.6\%$ | $0.096$ | 12 |
+| **DCOP-Max-Sum ($B=24$)** | Communication | **$811.3$** | $\pm 29.3$ | **$1.101$** | **$62.8\%$** | **$0.071$** | 24 |
+| Shapley Q-Learning ($\lambda=0.5$) | Incentive MARL | $748.6$ | $\pm 63.6$ | $1.193$ | $34.4\%$ | $0.200$ | 0 |
+| Centralized Planner ($\hat\pi^\star$) | Hungarian matching | $893.4$ | $\pm 19.1$ | $1.000$ | $100\%$ | $0.090$ | 0 |
 
-*(Note: Random baseline incurs massive capture penalties, serving as lower-bound anchor).*
+*Honest caveat:* the plain greedy heuristic recovers more of the gap than either remedy, which mainly shows that short-trained independent Q-learners are a weak selfish reference. Results across 7 conditions are in [Experiment 4](#experiment-4-eight-methods-across-seven-conditions).
 
 ---
 
@@ -202,92 +217,149 @@ $$U_i^\lambda(\pi) = (1 - \lambda) J_i(\pi) + \lambda \varphi_i(\pi), \quad \lam
 
 ## 📈 Experimental Results & Hypothesis Verification
 
-### Experiment 1: Team Size $k$ & Ghost Aggression $\beta$ vs. PoA
+| Hypothesis | Verdict |
+| :--- | :--- |
+| **H1**: PoA grows with team size and pellet scarcity | **Partly supported**: yes for scarcity, no for team size |
+| **H2**: DCOP recovers much of the gap with a small budget | **Supported for Max-Sum** (best at $B=24$; more messages hurt) |
+| **H3**: Shapley helps more when ghosts are dangerous | **Not statistically supported** (right direction, but seed variance exceeds the gain) |
+| Success criterion: clear PoA > 1 and one remedy recovers a meaningful share | **Met** (Max-Sum DCOP) |
+
+### Experiment 1-T: Exact PoA on a Toy Maze (Method M1)
 <p align="center">
-  <img src="plots/fig_e1_poa_vs_k_beta.png" alt="Experiment 1: PoA vs k and beta" width="650"/>
+  <img src="plots/fig_toy_exact_poa.png" alt="Exact PoA on toy maze" width="850"/>
 </p>
 
-- **Hypothesis 1 (H1) Confirmed**:
-  - As team size grows ($k=2 \to 3 \to 4$), the competition for pellets intensifies, causing the Price of Anarchy to escalate.
-  - When ghost danger is severe ($\beta=0.9$), selfish agents suffer massive coordination collapse, driving $\mathrm{PoA}$ to **$> 13.5$** at $k=4$, because uncoordinated agents crowd into escape paths and trap each other against chasing ghosts. The centralized planner avoids this entirely through synchronized route reservations.
+On the 5×5 ring maze `toy_exact` (2 Pac-Men, 1 ghost, 7 pellets, horizon 12) the whole joint state space (37,550 states) is enumerated. The **exact team optimum** is solved by dynamic programming, **exact best responses** are computed against fixed opponents, and **Nash equilibria** are found by iterated best response from 5 starting profiles ([src/exact_solver.py](src/exact_solver.py)).
+
+| β | Exact $J(\pi^\star)$ | Equilibrium found | Worst NE | **PoA** | PoS | Hungarian planner vs exact optimum |
+| :---: | :---: | :--- | :---: | :---: | :---: | :---: |
+| 0.0 | 51.48 | exact pure NE (5/5 starts) | 42.57 | **1.209** | 1.177 | 79.4% |
+| 0.5 | 57.56 | ε-NE (ε = 1.42) | 39.54 | 1.456 | 1.456 | 75.6% |
+| 0.9 | 60.59 | ε-NE (ε = 0.33) | 41.24 | 1.469 | 1.469 | 83.8% |
+
+- **Why selfish play misses the optimum:** the team-optimal policy is not an equilibrium. One Pac-Man can raise its own return by deviating (by 7.0 at β=0, by 16.0 and 17.5 at β=0.5 and 0.9), so selfish best responses move away from it.
+- At β=0, IBR converges from all 5 starts to **5 different pure equilibria** (42.57 to 43.74), all below the optimum (51.48); even the best equilibrium loses 15% (PoS = 1.177).
+- With ghost pressure, best responses cycle from every start, so no pure equilibrium was found and the smallest-gap ε-equilibrium is reported (labelled as such).
+- The exact model matches the simulator: replaying $\pi^\star$ in the real environment reproduces its value within 0.2.
+- The Hungarian planner reaches only 76 to 84% of the true optimum (on this maze it is no better than selfish Q-learning), so every PoA estimated on large mazes is an **underestimate**.
+- Independent Q-learning gives PoA estimates of 1.29, 1.32 and 1.20 here: close to the exact value at β=0, but with ghosts it scores above the ε-equilibria, so it understates the worst case.
 
 ---
 
-### Experiment 2: DCOP Message Budget Recovery (DSA vs. Max-Sum)
+### Experiment 1: Team Size, Ghost Aggression & Pellet Scarcity vs. PoA
 <p align="center">
-  <img src="plots/fig_e2_dcop_budget.png" alt="Experiment 2: DCOP Message Budget Recovery" width="650"/>
+  <img src="plots/fig_e1_poa_vs_k_beta.png" alt="Experiment 1: PoA vs k and beta" width="850"/>
+  <img src="plots/fig_e1_poa_vs_scarcity.png" alt="Experiment 1: PoA vs pellet scarcity" width="850"/>
 </p>
 
-- **Hypothesis 2 (H2) Confirmed**:
-  - At zero communication ($B=0$), agents greedily select the single most pellet-dense region, causing 100% collision overlap and $0\%$ recovery.
-  - As message budget $B$ increases, agents exchange pairwise factor potentials to deconflict regions.
-  - **Max-Sum vs. DSA**: On the cyclic 3-agent factor graph, Max-Sum achieves superior convergence, steadily recovering **$66.2\%$** of the gap at $B=24$, while DSA exhibits local search oscillations.
+| Est. PoA | β=0.0 | β=0.3 | β=0.6 | β=0.9 | 100% pellets | 50% | 25% |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| k=2 | 2.047 | 1.909 | 1.006 | 1.337 | 1.000 | 1.000 | 1.431 |
+| k=3 | 1.620 | 1.559 | 1.448 | 1.373 | 1.584 | 1.876 | **3.381** |
+| k=4 | 1.580 | 1.436 | 1.340 | 1.323 | 1.472 | 1.854 | 1.424 |
+
+- **Scarcity raises PoA** (k=3: 1.58 → 1.88 → 3.38). **Team size does not**: PoA is highest for k=2.
+- The k=2 row is the least reliable: selfish learning varies strongly between training seeds (at β=0.3 the three seeds score 760, 14 and 387).
+- PoA falls with β on this maze, while the exact toy analysis shows the opposite, so the β trend on the large maze is treated as inconclusive.
 
 ---
 
-### Experiment 3: Shapley Shaping Parameter $\lambda$ & Gini Fairness
+### Experiment 2: DCOP Message Budget & Number of Regions
 <p align="center">
-  <img src="plots/fig_e3_shapley_lambda.png" alt="Experiment 3: Shapley Shaping Parameter lambda" width="650"/>
+  <img src="plots/fig_e2_dcop_budget.png" alt="Experiment 2: DCOP message budget" width="850"/>
+  <img src="plots/fig_e2_messages.png" alt="Experiment 2: messages per step" width="500"/>
 </p>
 
-- **Hypothesis 3 (H3) Confirmed**:
-  - At $\lambda=0.0$ (purely selfish), team return is low ($472.7$) and Gini inequality is severe ($0.508$) because one agent dominates pellet harvesting while others get starved or trapped.
-  - Introducing Shapley reward shaping ($\lambda=0.25 - 0.50$) dramatically increases team return to **$835.4$** while dropping the Gini coefficient to **$0.113$** (near-perfect fairness).
-  - **Resolution of Free-Riding**: Unlike naive equal sharing ($r_i = J/k$), which rewards non-contributing agents and invites slacking, Shapley shaping rewards agents strictly in proportion to their counterfactual marginal value.
+Gap recovered (%) for $m \in \{2,3,4\}$ regions; all budgets for a given $m$ use the same episodes (common random numbers).
+
+| | B=0 | 6 | 12 | 24 | 36 | 48 |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| Max-Sum, m=2 | 43.6 | 43.6 | 54.5 | **64.6** | −10.3 | −21.4 |
+| Max-Sum, m=3 | 19.7 | 19.7 | 52.9 | **62.7** | 49.9 | 39.3 |
+| Max-Sum, m=4 | 50.0 | 50.0 | 70.0 | **76.6** | 75.1 | 59.6 |
+| DSA, m=3 | 19.7 | 27.6 | 23.7 | 29.9 | 31.3 | 24.1 |
+
+- Max-Sum needs 12 messages for one iteration (k=3), so B=6 equals no communication.
+- Even with **no communication (B=0)**, region-focused agents recover 20 to 50% of the gap.
+- Max-Sum peaks at **B=24 for every m** (up to **76.6%** with 4 regions). More messages hurt, likely because loopy max-sum on the fully connected factor graph overshoots without damping; with m=2 (fewer regions than agents) the assignment collapses.
+- More regions help Max-Sum, because every agent can get a conflict-free region.
+- DSA stays at 20 to 44% regardless of budget.
 
 ---
 
-### Experiment 4: Comprehensive Multi-Method Benchmark
+### Experiment 3: Shapley λ Across Ghost Danger (H3)
 <p align="center">
-  <img src="plots/fig_e4_method_comparison.png" alt="Experiment 4: Multi-Method Benchmark" width="850"/>
+  <img src="plots/fig_e3_shapley_lambda.png" alt="Experiment 3: Shapley lambda" width="850"/>
+  <img src="plots/fig_e3_h3_gain_vs_beta.png" alt="Experiment 3: H3 gain vs beta" width="500"/>
 </p>
 
-- **Comparative Takeaway**:
-  - **DCOP** achieves outstanding performance ($J=822.3$, $\mathrm{PoA}=1.109$) with **zero training**, relying on runtime communication ($B=24$).
-  - **Shapley Q-Learning** achieves strong cooperative behavior with **zero runtime communication**, learning intrinsic team alignment via marginal credit assignment.
-  - **Centralized Social Optimum** establishes the theoretical upper bound ($J=911.7$, $\mathrm{PoA}=1.000$).
+| Team return (±95% CI across seeds) | λ=0 | 0.25 | 0.5 | 0.75 | 1.0 | Equal-share |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| β=0.0 | 695.7 ±24 | 692.4 ±21 | 537.1 ±210 | **772.6** ±114 | 712.9 ±12 | 300.8 |
+| β=0.5 | 663.8 ±31 | **712.9** ±191 | 540.5 ±421 | 591.7 ±156 | 674.8 ±36 | 454.3 |
+| β=0.9 | 624.6 ±104 | 518.5 ±112 | 618.5 ±209 | **732.1** ±114 | 636.7 ±307 | 210.4 |
+
+- The best shaped policy beats selfish learning at every β, with the biggest gain at β=0.9 (+107.5), but the best λ keeps changing and seed variance (up to ±421) is larger than the gains.
+- Equal-share is the worst method at every β.
+- **Why the effect is weak:** with step-level credit, the Shapley value splits a contested pellet equally, which equals the *expected* reward of the random-winner rule. So shaping mostly reduces variance instead of changing incentives. Trajectory-level counterfactual credit would be needed.
+
+---
+
+### Experiment 4: Eight Methods Across Seven Conditions
+<p align="center">
+  <img src="plots/fig_e4_method_comparison.png" alt="Experiment 4: main benchmark" width="850"/>
+  <img src="plots/fig_e4_conditions.png" alt="Experiment 4: conditions heatmap" width="850"/>
+</p>
+
+Gap recovered (%):
+
+| Condition | Greedy | Equal-share | DSA | **Max-Sum** | Shapley |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| main (β=0.5) | 92.6 | −35.0 | 35.6 | **62.8** | 34.4 |
+| calm (β=0) | 77.6 | 17.9 | 48.7 | **74.5** | 36.4 |
+| dangerous (β=0.9) | 96.7 | −31.9 | 38.0 | **67.9** | −25.3 |
+| scarce (50% pellets) | 88.7 | −113.2 | −2.9 | **45.5** | −6.3 |
+| `small_grid` | −70.7 | −1.4 | −37.6 | −34.0 | −31.4 |
+| `medium_classic` | 23.7 | −214.7 | 13.9 | −56.3 | −55.5 |
+| `open_contention` | 49.6 | −521.1 | −52.0 | **67.3** | −87.0 |
+
+- **Max-Sum is the best decentralized remedy**: 45 to 75% on the benchmark maze in every setting, 67% on `open_contention`, 90.8% of the centralized return with 24 messages/step.
+- DCOP agents are caught least (0.35 and 0.95 captures per episode vs 3.52 for selfish Q); Shapley Q is caught most (4.33), which hurts it when ghosts are aggressive.
+- Shapley shaping helps in calm conditions but hurts under danger and scarcity. Equal-share is consistently harmful.
+- Smaller layouts differ: on `small_grid` no method except the planner beats selfish learning, and on `medium_classic` only greedy (+23.7%) and DSA (+13.9%) do. The selfish gap there is only 32 to 40 points, so percentages swing a lot. The larger `open_contention` behaves like the main maze.
 
 ---
 
 ## 📁 Project Architecture & File Organization
 
 ```
-multi_agent_pacman_poa/
-├── play_game.py                   # Desktop Python GUI Interactive Game (Arrow keys / WASD)
-├── play.html                      # Standalone Web Browser Arcade Game (zero install)
-├── run_all.py                     # Master execution script for complete reproducibility
-├── visualize.py                   # Retro Arcade Maze renderer matching Proposal Figure 1
-├── generate_animations.py         # Simulation animation GIF generator
-├── requirements.txt               # Dependencies (standard: numpy, scipy, matplotlib, pandas, pillow)
-├── src/                           # Core modular simulator & algorithms
-│   ├── environment.py             # Multi-Agent Pac-Man Gym-style environment (fast clone)
-│   ├── layouts.py                 # Maze layouts (proposal_maze, toy, small_grid, medium, open)
-│   ├── ghosts.py                  # Parametric ghost policies (beta aggression)
-│   ├── baselines.py               # Random, Greedy, and Centralized Hungarian Planner (pi*)
-│   ├── dcop.py                    # Spatial Voronoi partitioning, DSA, and Max-Sum belief propagation
-│   ├── shapley.py                 # Exact Shapley marginal credit calculator (k <= 4)
-│   ├── q_learning.py              # Feature-based Approximate Q-learning agents
-│   ├── trainer.py                 # Multi-seed training, evaluation loops, and confidence statistics
-│   └── metrics.py                 # PoA, Gini coefficient, gap recovery, and 95% CI
-├── experiments/                   # Experiment execution scripts
-│   ├── run_experiment_1.py        # Team size k & beta vs PoA
-│   ├── run_experiment_2.py        # DCOP message budget B vs recovered gap
-│   ├── run_experiment_3.py        # Shapley parameter lambda vs return and Gini
-│   └── run_experiment_4.py        # Full cross-method benchmark suite
-├── results/                       # Generated raw experiment data
-│   ├── experiment_1.json
-│   ├── experiment_2.json
-│   ├── experiment_3.json
-│   ├── experiment_4_benchmark.csv
-│   └── experiment_4_benchmark.json
-└── plots/                         # Publication figures and animated GIFs
-    ├── fig_maze_simulation.png    # Retro arcade maze snapshot (Figure 1)
-    ├── comparison_selfish_vs_dcop.gif # Animated side-by-side gameplay comparison
-    ├── pacman_dcop_simulation.gif # Animated DCOP gameplay recording
-    ├── fig_e1_poa_vs_k_beta.png   # Experiment 1 publication plot
-    ├── fig_e2_dcop_budget.png     # Experiment 2 publication plot
-    ├── fig_e3_shapley_lambda.png  # Experiment 3 publication plot
-    └── fig_e4_method_comparison.png # Experiment 4 multi-panel benchmark plot
+multi-agent-pacman-poa/
+├── play_game.py                   # Desktop Python GUI game (Arrow keys / WASD)
+├── play.html / index.html         # Browser arcade game (GitHub Pages)
+├── run_all.py                     # Runs everything (--quick for a smoke test, --only to pick stages)
+├── visualize.py                   # Maze renderer (Figure 1)
+├── generate_animations.py         # Gameplay GIF generator
+├── requirements.txt               # numpy, scipy, matplotlib, pandas, pillow
+├── src/
+│   ├── environment.py             # Multi-agent Pac-Man environment (pellet scarcity option)
+│   ├── layouts.py                 # proposal_maze, toy_exact, toy, small_grid, medium_classic, open_contention
+│   ├── ghosts.py                  # Ghost policy with aggression beta
+│   ├── baselines.py               # Random, greedy, Hungarian centralized planner
+│   ├── exact_solver.py            # Exact optimum, best responses, iterated best response, PoA/PoS (toy maze)
+│   ├── dcop.py                    # Region partitioning, DSA and Max-Sum under a message budget
+│   ├── shapley.py                 # Exact Shapley credit (2^k coalitions)
+│   ├── q_learning.py              # Linear approximate Q-learning agents
+│   ├── trainer.py                 # Training, multi-seed evaluation, messages/step metric
+│   └── metrics.py                 # PoA, Gini, gap recovered, 95% CI
+├── experiments/
+│   ├── common.py                  # Plot style, saving, JSON helpers
+│   ├── run_experiment_toy_ne.py   # Exp 1-T: exact PoA on toy maze
+│   ├── run_experiment_1.py        # Exp 1: PoA vs k, beta, pellet scarcity
+│   ├── run_experiment_2.py        # Exp 2: DCOP budget B x regions m
+│   ├── run_experiment_3.py        # Exp 3: Shapley lambda x beta (H3)
+│   └── run_experiment_4.py        # Exp 4: 8 methods x 7 conditions
+├── results/                       # JSON / CSV outputs
+└── plots/                         # All figures (PNG) and gameplay GIFs
 ```
 
 ---
@@ -296,47 +368,28 @@ multi_agent_pacman_poa/
 
 ### 1. Installation
 ```bash
-git clone https://github.com/your-username/multi_agent_pacman_poa.git
-cd multi_agent_pacman_poa
-
-# Create and activate virtual environment (optional)
+git clone https://github.com/Rajput-Vivek-16/multi-agent-pacman-poa.git
+cd multi-agent-pacman-poa
 python -m venv venv
 .\venv\Scripts\activate      # Windows
 source venv/bin/activate     # Linux / macOS
-
-# Install lightweight dependencies
 pip install -r requirements.txt
 ```
 
 ### 2. Interactive Gameplay
 ```bash
-# Launch Desktop GUI game (Play as P1 or watch AI coordination)
-python play_game.py
-
-# Or open play.html in your browser:
-# double-click play.html
+python play_game.py          # desktop GUI
+# or open play.html in a browser
 ```
 
-### 3. Full One-Click Reproducibility
-To regenerate all figures, animated GIFs, JSON/CSV results, and benchmark tables from scratch:
+### 3. Reproduce All Results
 ```bash
-python run_all.py
+python run_all.py --quick                 # 2 to 3 minute smoke test
+python run_all.py                         # full run (all figures, GIFs, results)
+python run_all.py --only toy e1 e2 e3 e4  # experiments only (about 20 to 30 minutes)
 ```
 
-Or run any experiment individually:
-```bash
-# Render environment visual
-python visualize.py
-
-# Generate animated GIFs
-python generate_animations.py
-
-# Run individual experiments
-python experiments/run_experiment_1.py
-python experiments/run_experiment_2.py
-python experiments/run_experiment_3.py
-python experiments/run_experiment_4.py
-```
+Each experiment can also be run on its own, e.g. `python experiments/run_experiment_toy_ne.py`. All randomness is seeded; Q-learning results can still vary slightly between machines. All figures are written to `plots/` and all numbers to `results/`.
 
 ---
 
@@ -344,9 +397,9 @@ python experiments/run_experiment_4.py
 
 | Member | Proposal Task Allocation | Final Status & Implementation Highlights |
 | :--- | :--- | :--- |
-| **Tanuj Sharma** (23110331) | Multi-Pac-Man simulator, maze layouts, ghost policies, interactive GUI, and **Shapley Value Module (Dhruv Jalan's Work Absorbed)**: Exact Shapley credit assignment, counterfactual reward shaping, free-rider resolution, and fairness evaluation (Exp 3). | **Completed & Verified**: Built high-speed `MultiAgentPacmanEnv` with custom shallow cloning, `proposal_maze` (21×15), parametric ghost policies (`ghosts.py`), interactive GUI game (`play_game.py`), web game (`play.html`), exact Shapley credit calculator (`shapley.py`), Shapley Q-learning training pipeline, Gini fairness index, and Experiment 3 suite. |
-| **Rajput Vivek** (23110269) | Independent Q-learning baseline, centralized planner, PoA engine, Exp 1 & 4. | **Completed & Verified**: Implemented Hungarian matching centralized planner (`baselines.py`), Independent Q-learning agent (`q_learning.py`), PoA metric calculator, Experiment 1 & 4 benchmark suites, and publication plotting. |
-| **Akash KP** (23110021) | DCOP module (Max-Sum, DSA), region partitioning, message budget analysis, Exp 2. | **Completed & Verified**: Implemented Voronoi and vertical column spatial partitioner, DCOP cost model with DSA and Max-Sum belief propagation solvers (`dcop.py`), message budget scaling, and Experiment 2 suite. |
+| **Tanuj Sharma** (23110331) | Multi-Pac-Man simulator, maze layouts, ghost policies, interactive GUI, and **Shapley Value Module (Dhruv Jalan's Work Absorbed)**: exact Shapley credit assignment, reward shaping, free-rider analysis, and fairness evaluation (Exp 3). | **Completed**: Built `MultiAgentPacmanEnv` with custom shallow cloning, `proposal_maze` (21×15), parametric ghost policies (`ghosts.py`), interactive GUI game (`play_game.py`), web game (`play.html`), exact Shapley credit calculator (`shapley.py`), Shapley Q-learning training pipeline, Gini fairness index, and Experiment 3 suite. |
+| **Rajput Vivek** (23110269) | Independent Q-learning baseline, centralized planner, toy-maze equilibrium computation, PoA analysis, Exp 1 & 4. | **Completed**: Implemented Hungarian matching centralized planner (`baselines.py`), independent Q-learning agent (`q_learning.py`), **exact toy-maze optimum and iterated best response equilibria** (`exact_solver.py`, Exp 1-T), PoA metric calculator, Experiment 1 & 4 benchmark suites (multi-seed, pellet scarcity, 7 conditions), and publication plotting. |
+| **Akash KP** (23110021) | DCOP module (Max-Sum, DSA), region partitioning, message budget analysis, Exp 2. | **Completed**: Implemented Voronoi and vertical column spatial partitioner, DCOP cost model with DSA and Max-Sum belief propagation solvers (`dcop.py`), message budget scaling, and Experiment 2 suite (budget × number of regions, messages per step). |
 
 *(Note: Dhruv Jalan's originally assigned tasks on Shapley value credit assignment, marginal contribution calculation, and fairness analysis were fully absorbed, implemented, and delivered by Tanuj Sharma).*
 
@@ -359,7 +412,7 @@ python experiments/run_experiment_4.py
 4. M. L. Littman. *Markov games as a framework for multi-agent reinforcement learning*. In ICML, 1994.
 5. A. Farinelli, A. Rogers, A. Petcu, and N. R. Jennings. *Decentralised coordination of low-power embedded devices using the max-sum algorithm*. In AAMAS, 2008.
 6. F. Fioretto, E. Pontelli, and W. Yeoh. *Distributed constraint optimization problems and applications: A survey*. Journal of Artificial Intelligence Research, 61, 2018.
-7. W. Zhang, G. Wang, Z. Xing, and L. Wittenburg. *Distributed stochastic search and distributed breakout for constraint optimization problems in sensor networks*. Artificial Intelligence, 161(1–2), 2005.
+7. W. Zhang, G. Wang, Z. Xing, and L. Wittenburg. *Distributed stochastic search and distributed breakout for constraint optimization problems in sensor networks*. Artificial Intelligence, 161(1-2), 2005.
 8. J. Wang, Y. Zhang, T.-K. Kim, and Y. Gu. *Shapley Q-value: A local reward approach to solve global reward games*. In AAAI, 2020.
 9. J. Foerster et al. *Counterfactual multi-agent policy gradients*. In AAAI, 2018.
 10. J. DeNero and D. Klein. *Teaching introductory artificial intelligence with Pac-Man*. In EAAI, 2010.

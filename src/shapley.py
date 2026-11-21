@@ -1,4 +1,4 @@
-"""
+r"""
 Shapley Value Computation Module:
 Exact calculation of Shapley values for team credit assignment:
 phi_i = sum_{S subseteq N \ {i}} [ |S|! (k - |S| - 1)! / k! ] * [ v(S cup {i}) - v(S) ]
